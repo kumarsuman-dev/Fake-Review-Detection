@@ -1,0 +1,20 @@
+1. Open Terminal
+2. Go to the project folder
+    cd "/Users/sumankumar/Desktop/Projects new/untitled folder/Fake_reviews_detections"
+3. Create a virtual environment (only the first time)
+    python3 -m venv venv
+4. Activate the virtual environment
+    source venv/bin/activate
+5. Upgrade pip (recommended)
+    python3 -m pip install --upgrade pip
+6. Install all required packages
+    pip install -r requirements.txt
+
+If pip doesn't work, use:
+    pip3 install -r requirements.txt
+7. Run the Flask application
+    python3 app.py
+8. Open the application in your browser
+    http://localhost:5001
+9. Stop the server
+    Press:  Ctrl + C :- Deactivate the virtual environment (when finished)
