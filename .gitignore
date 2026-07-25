@@ -8,10 +8,6 @@ __pycache__/
 *.py[cod]
 *.pyo
 
-# Model files (large binary files)
-*.pkl
-*.model
-
 # OS files
 .DS_Store
 Thumbs.db
