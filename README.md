@@ -43,8 +43,10 @@ Empowered by AI, NLP, and machine learning, this web app classifies reviews as *
 ## 📸 Screenshots
 
 >
-![alt text](image.png)
-![alt text](image-1.png)
+!(assets/1.png)
+!(assets/2.png)
+!(assets/3.png)
+
 ---
 
 ## 🚚 Getting Started
