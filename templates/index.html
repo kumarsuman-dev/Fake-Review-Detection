@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Review Detector - Advanced AI Review Analysis</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Outfit (Very modern & sleek) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Javascript -->
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100 font-outfit min-h-screen flex flex-col items-center justify-start p-4 md:p-8 antialiased">
+    
+    <!-- Outer Glow Effects -->
+    <div class="glow-bg glow-purple"></div>
+    <div class="glow-bg glow-blue"></div>
+
+    <main class="w-full max-w-5xl z-10">
+        
+        <!-- Header -->
+        <header class="text-center mb-8 animate-fade-in">
+            <div class="inline-flex items-center justify-center p-3 bg-indigo-500/10 rounded-full border border-indigo-500/25 mb-4 text-indigo-400 backdrop-blur-md">
+                <i class="fa-solid fa-user-secret text-3xl px-1"></i>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400">
+                Fake Review Detector
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl mt-3 max-w-2xl mx-auto font-light">
+                Analyze reviews using machine learning to instantly flag computer-generated and suspicious product feedback.
+            </p>
+        </header>
+
+        <!-- Search Bar & Demo Section -->
+        <section class="glass-panel p-6 md:p-8 rounded-2xl mb-8 border border-white/10 shadow-2xl animate-slide-up">
+            <h2 class="text-xl font-semibold mb-4 text-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass text-indigo-400"></i> Start Analysis
+            </h2>
+            
+            <div class="relative flex flex-col md:flex-row gap-3">
+                <div class="relative flex-1">
+                    <i class="fa-brands fa-amazon absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                    <input type="text" id="url" placeholder="Paste Amazon Product URL (e.g., https://www.amazon.com/dp/B0BP7M277Z)"
+                           class="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-900/60 border border-slate-700/80 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-slate-100 placeholder-slate-500 text-base transition-all duration-300">
+                </div>
+                
+                <div class="flex gap-2">
+                    <button onclick="analyzeReviews()" id="btn-analyze"
+                            class="flex-1 md:flex-initial px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold rounded-xl shadow-lg shadow-emerald-500/10 hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Run Detection
+                    </button>
+                    <button onclick="clearResults()"
+                            class="px-5 py-4 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl border border-slate-700 transition-all duration-300">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Demo Row -->
+            <div class="mt-6 pt-6 border-t border-white/5">
+                <p class="text-sm font-medium text-slate-400 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-play text-indigo-400"></i> Try clicking a sample product below:
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button onclick="loadDemoProduct('headphones')" 
+                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
+                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">Audio</div>
+                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Sony XM4 Headphones</div>
+                    </button>
+                    <button onclick="loadDemoProduct('kindle')" 
+                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
+                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">E-Reader</div>
+                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Kindle Paperwhite</div>
+                    </button>
+                    <button onclick="loadDemoProduct('chair')" 
+                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
+                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">Furniture</div>
+                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Ergonomic Office Chair</div>
+                    </button>
+                    <button onclick="loadDemoProduct('generic')" 
+                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
+                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">General</div>
+                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Product Review Demo</div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="mt-8 text-center hidden animate-pulse">
+            <div class="inline-flex items-center gap-3 px-6 py-3 bg-indigo-500/10 border border-indigo-500/25 rounded-full text-indigo-300">
+                <i class="fa-solid fa-spinner animate-spin text-xl"></i>
+                <span class="text-base font-medium">Scraping reviews and runnning AI classifier...</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Output Container -->
+        <div id="dashboard-container" class="hidden">
+            <!-- Demo Mode Warning Banner -->
+            <div id="demo-banner" class="hidden mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 flex items-start gap-3 backdrop-blur-md">
+                <i class="fa-solid fa-triangle-exclamation text-lg mt-0.5"></i>
+                <div>
+                    <h4 class="font-bold">Amazon Bot Protection Triggered</h4>
+                    <p class="text-sm text-amber-400/90 mt-0.5">
+                        Direct connection was rate-limited or blocked by Amazon. We've loaded a set of high-fidelity pre-scraped reviews for this category to demonstrate the AI detection.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Stats Overview Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Trust Gauge Card -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm text-slate-400 font-medium uppercase tracking-wider">Product Trust Score</h3>
+                        <div class="text-4xl font-extrabold text-white mt-1" id="stat-trust-score">--%</div>
+                        <p class="text-xs text-slate-400 mt-2" id="stat-trust-desc">Percentage of verified genuine reviews.</p>
+                    </div>
+                    <div class="relative w-24 h-24 flex items-center justify-center">
+                        <!-- SVG Circle Ring -->
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent"/>
+                            <circle id="trust-gauge-circle" cx="48" cy="48" r="40" stroke="url(#emeraldGradient)" stroke-width="8" fill="transparent"
+                                    stroke-dasharray="251.2" stroke-dashoffset="251.2" class="transition-all duration-1000 ease-out"/>
+                            <defs>
+                                <linearGradient id="emeraldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#34d399" />
+                                    <stop offset="100%" stop-color="#059669" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="absolute text-lg font-bold text-slate-200" id="stat-trust-gauge-text">--%</span>
+                    </div>
+                </div>
+
+                <!-- Verified Genuine Count -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-sm text-slate-400 font-medium uppercase tracking-wider">Verified Genuine</h3>
+                            <div class="text-4xl font-extrabold text-emerald-400 mt-1" id="stat-real-count">0</div>
+                        </div>
+                        <span class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/25">
+                            <i class="fa-solid fa-circle-check text-xl"></i>
+                        </span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-4">
+                        <div id="bar-real-percent" class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-1.5 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Suspicious / AI-Generated Count -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-sm text-slate-400 font-medium uppercase tracking-wider">Suspicious / Fake</h3>
+                            <div class="text-4xl font-extrabold text-rose-500 mt-1" id="stat-fake-count">0</div>
+                        </div>
+                        <span class="p-2 bg-rose-500/10 rounded-lg text-rose-400 border border-rose-500/25">
+                            <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                        </span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-4">
+                        <div id="bar-fake-percent" class="bg-gradient-to-r from-rose-400 to-rose-600 h-1.5 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Cards Output Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-indigo-400"></i> Detailed Review Audit
+                </h3>
+                <span class="text-sm text-slate-400 font-medium" id="stat-total-reviews">Showing -- reviews</span>
+            </div>
+
+            <!-- Results container -->
+            <div id="result" class="space-y-4">
+                <!-- Javascript will inject review cards here -->
+            </div>
+        </div>
+        
+        <!-- Error Area -->
+        <div id="error-container" class="hidden mt-8 max-w-md mx-auto p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-center flex flex-col items-center gap-2 backdrop-blur-md">
+            <i class="fa-solid fa-circle-xmark text-3xl"></i>
+            <h4 class="font-bold text-slate-200">Analysis Failed</h4>
+            <p id="error-text" class="text-sm text-rose-400/90"></p>
+        </div>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 mb-4 text-center text-slate-600 text-xs z-10 w-full">
+        <p>&copy; 2026 Fake Review Detector. Empowered by Word2Vec & SVM Classifier.</p>
+    </footer>
+</body>
+</html>

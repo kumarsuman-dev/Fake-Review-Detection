@@ -1,0 +1,134 @@
+/* Custom Styles & Glassmorphism Properties */
+
+:root {
+    --glass-bg: rgba(15, 23, 42, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background Glow Effects */
+.glow-bg {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.15;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.glow-purple {
+    top: 10%;
+    left: 15%;
+    width: 350px;
+    height: 350px;
+    background: #6366f1;
+}
+
+.glow-blue {
+    bottom: 15%;
+    right: 15%;
+    width: 400px;
+    height: 400px;
+    background: #0ea5e9;
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInCard {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.review-card-anim {
+    animation: slideInCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-fill-mode: both;
+}
+
+/* Custom Interactive States */
+.demo-card:hover {
+    box-shadow: 0 4px 20px 0 rgba(99, 102, 241, 0.15);
+}
+
+/* Review Badge */
+.badge-real {
+    background: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-fake {
+    background: rgba(244, 63, 94, 0.1);
+    color: #fb7185;
+    border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+/* Accordion Smooth Transition */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.accordion-active .accordion-content {
+    max-height: 250px;
+    opacity: 1;
+}
+
+.accordion-btn i {
+    transition: transform 0.3s ease;
+}
+
+.accordion-active .accordion-btn i {
+    transform: rotate(180deg);
+}
+
+/* Styling custom scrollbars for reviews */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
