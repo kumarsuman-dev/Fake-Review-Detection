@@ -1,6 +1,6 @@
 import re
 import emoji
-from textblob import TextBlob
+
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer, PorterStemmer
 from nltk.tokenize import word_tokenize
@@ -14,10 +14,10 @@ def handle_emojis(text):
     """Converts emojis into text descriptions."""
     return emoji.demojize(text)
 
-# Function to correct spelling mistakes
-def correct_spelling(r):
-    """Performs spelling correction on the input text."""
-    return str(TextBlob(r).correct())
+# Function to correct spelling mistakes (disabled for performance)
+def correct_spelling(text):
+    """Returns text as-is (spelling correction removed for speed)."""
+    return text
 
 # Function to apply lemmatization, stemming, and remove stopwords
 def lemmatize_and_stem(r):
