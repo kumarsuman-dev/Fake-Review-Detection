@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fake Review Detector - Advanced AI Review Analysis</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='logo.jpg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='logo.jpg') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for Icons -->
@@ -25,8 +28,8 @@
         
         <!-- Header -->
         <header class="text-center mb-8 animate-fade-in">
-            <div class="inline-flex items-center justify-center p-3 bg-indigo-500/10 rounded-full border border-indigo-500/25 mb-4 text-indigo-400 backdrop-blur-md">
-                <i class="fa-solid fa-user-secret text-3xl px-1"></i>
+            <div class="inline-flex items-center justify-center mb-4">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Fake Review Detector Logo" class="w-20 h-20 rounded-2xl shadow-lg shadow-indigo-500/30 border border-indigo-500/20">
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400">
                 Fake Review Detector
