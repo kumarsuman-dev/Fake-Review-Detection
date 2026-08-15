@@ -3,6 +3,7 @@
 Detect fraudulent Amazon product reviews and shop smarter!  
 Empowered by AI, NLP, and machine learning, this web app classifies reviews as **Real** or **Fake** and generates AI-powered summaries to help you make informed decisions.
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://fake-review-detection-omega.vercel.app)
 ![Fake Review Detection Banner](https://img.shields.io/badge/AI-Powered-blueviolet?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&style=flat-square)
 ![Flask](https://img.shields.io/badge/Flask-Backend-lightgrey?logo=flask&style=flat-square)
@@ -11,6 +12,10 @@ Empowered by AI, NLP, and machine learning, this web app classifies reviews as *
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
 <br>
+
+## 🌐 Live Demo
+
+👉 **[https://fake-review-detection-omega.vercel.app](https://fake-review-detection-omega.vercel.app)**
 
 ---
 
@@ -154,6 +159,7 @@ Results displayed on Web UI
 
 **Suman Kumar**
 - GitHub: [@kumarsuman-dev](https://github.com/kumarsuman-dev)
+- 🌐 Live App: [fake-review-detection-omega.vercel.app](https://fake-review-detection-omega.vercel.app)
 
 ---
 
