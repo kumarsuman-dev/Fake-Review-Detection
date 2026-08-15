@@ -15,7 +15,7 @@ Empowered by AI, NLP, and machine learning, this web app classifies reviews as *
 
 ## 🌐 Live Demo
 
-👉 **[https://fake-review-detection-omega.vercel.app](https://fake-review-detection-omega.vercel.app)**
+👉 **<a href="https://fake-review-detection-omega.vercel.app" target="_blank">https://fake-review-detection-omega.vercel.app</a>**
 
 ---
 
@@ -159,7 +159,7 @@ Results displayed on Web UI
 
 **Suman Kumar**
 - GitHub: [@kumarsuman-dev](https://github.com/kumarsuman-dev)
-- 🌐 Live App: [fake-review-detection-omega.vercel.app](https://fake-review-detection-omega.vercel.app)
+- 🌐 Live App: <a href="https://fake-review-detection-omega.vercel.app" target="_blank">fake-review-detection-omega.vercel.app</a>
 
 ---
 
