@@ -112,11 +112,6 @@ import pandas as pd
 import os
 import nltk
 
-nltk.download('punkt')
-nltk.download('punkt_tab')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
 
 # Get the absolute path to the directory where app.py is located
 basedir = os.path.abspath(os.path.dirname(__file__))
