@@ -1,6 +1,5 @@
 import re
 import json
-import pandas as pd
 from bs4 import BeautifulSoup
 
 try:
@@ -278,10 +277,9 @@ def scrape_reviews(url):
     if reviews and len(reviews) >= 1:
         msg = f"Successfully extracted {len(reviews)} real live customer reviews from {platform_name}."
         print(msg)
-        return pd.DataFrame(reviews), False, platform_name, msg
+        return reviews, False, platform_name, msg
 
     # 2. 0 reviews or automated access restricted -> Category benchmark dataset
     msg = f"{platform_name} returned 0 written reviews for this listing or restricted direct headless access. Loaded high-density benchmark reviews to evaluate model classification."
     print(f"Fallback triggered for {platform_name}: {msg}")
-    df_mock = pd.DataFrame(MOCK_REVIEWS[category])
-    return df_mock, True, platform_name, msg
+    return MOCK_REVIEWS[category], True, platform_name, msg

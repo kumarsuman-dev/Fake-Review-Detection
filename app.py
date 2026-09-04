@@ -140,20 +140,18 @@ def analyze():
     except Exception as e:
         return jsonify({"error": f"Scraping error: {str(e)}"}), 500
 
-    if reviews is None or reviews.empty:
+    if not reviews:
         return jsonify({"error": "No reviews found and unable to load fallback dataset"}), 404
 
-    if "Review Text" not in reviews.columns or "Rating" not in reviews.columns:
-        return jsonify({"error": "Invalid reviews format"}), 400
-
     preprocessed_reviews = []
-    for i, review_text_raw in enumerate(reviews["Review Text"]):
+    for item in reviews:
+        review_text_raw = item.get("Review Text", "")
         review_text_processed = preprocess_text(review_text_raw)
 
         try:
-            rating = float(reviews.iloc[i]["Rating"])
-        except (ValueError, IndexError):
-            rating = 3.0
+            rating = float(item.get("Rating", 5.0))
+        except (ValueError, TypeError):
+            rating = 5.0
 
         preprocessed_reviews.append({
             "Review Text": review_text_processed,
