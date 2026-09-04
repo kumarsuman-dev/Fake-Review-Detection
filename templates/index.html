@@ -20,15 +20,15 @@
                         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
                     },
                     colors: {
-                        amazon: {
-                            dark: '#131921',
-                            nav: '#232f3e',
-                            orange: '#ff9900',
-                            orangeHover: '#e47911',
-                            yellow: '#febd69',
-                            btn: '#ffd814',
-                            btnHover: '#f7ca00',
-                            border: '#d5d9d9',
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        tealBrand: {
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
                         }
                     }
                 }
@@ -52,56 +52,36 @@
 </head>
 <body class="bg-subtle-pattern text-slate-900 font-sans min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- Top Navigation Header (Amazon Dark Navbar Theme) -->
-    <header class="sticky top-0 z-50 shadow-md">
-        <!-- Main Top Bar (#131921) -->
-        <nav class="bg-[#131921] border-b border-[#232f3e]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between">
-                
-                <!-- Brand Logo & Title -->
-                <a href="/" class="flex items-center gap-3 group">
-                    <img src="{{ url_for('static', filename='logo.jpg') }}" 
-                         alt="Fake Review Detection Logo" 
-                         class="w-10 h-10 rounded-full border-2 border-[#ff9900] object-cover shadow-sm group-hover:scale-105 transition-transform duration-200">
-                    <div>
-                        <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white block leading-tight">
-                            Fake Review Detection
-                        </span>
-                        <span class="text-[11px] text-[#febd69] font-semibold tracking-wide flex items-center gap-1">
-                            <i class="fa-solid fa-circle-check text-[9px] text-[#ff9900]"></i> Machine Learning Verification
-                        </span>
-                    </div>
+    <!-- Top Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
+            
+            <!-- Brand Logo & Title -->
+            <a href="/" class="flex items-center gap-3 group">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" 
+                     alt="Fake Review Detection Logo" 
+                     class="w-10 h-10 rounded-full border-2 border-teal-600/30 object-cover shadow-sm group-hover:scale-105 transition-transform duration-200">
+                <div>
+                    <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 block leading-tight">
+                        Fake Review Detection
+                    </span>
+                    <span class="text-[11px] text-teal-700 font-semibold tracking-wide flex items-center gap-1">
+                        <i class="fa-solid fa-circle-check text-[9px]"></i> Machine Learning Verification
+                    </span>
+                </div>
+            </a>
+
+
+            <!-- Action Button -->
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/kumarsuman-dev/Fake-Review-Detection" target="_blank" rel="noreferrer"
+                   class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-sm hover:shadow transition-all duration-200">
+                    <i class="fa-brands fa-github text-sm"></i>
+                    <span>GitHub Repo</span>
                 </a>
-
-                <!-- Action Button -->
-                <div class="flex items-center gap-3">
-                    <a href="https://github.com/kumarsuman-dev/Fake-Review-Detection" target="_blank" rel="noreferrer"
-                       class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#ff9900] hover:bg-[#e47911] text-[#131921] text-xs font-bold shadow-sm hover:shadow transition-all duration-200">
-                        <i class="fa-brands fa-github text-sm"></i>
-                        <span>GitHub Repo</span>
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Sub-Nav Strip (#232f3e - matching uploaded image: All, Fresh, Stores) -->
-        <div class="bg-[#232f3e] text-slate-200 text-xs py-1.5 px-4 sm:px-6 lg:px-8 border-t border-slate-700/50">
-            <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <div class="flex items-center gap-5 font-medium">
-                    <span class="flex items-center gap-1.5 text-white font-semibold cursor-default">
-                        <i class="fa-solid fa-bars text-sm"></i> All Stores
-                    </span>
-                    <span class="hidden sm:inline text-slate-300 text-[11px]">
-                        Amazon • Walmart • Flipkart • Shopify • eBay • Best Buy
-                    </span>
-                </div>
-                <div class="flex items-center gap-2 text-[11px] text-slate-300 font-medium">
-                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>NLP Models Ready</span>
-                </div>
             </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Main Content Container -->
     <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 flex-1">
@@ -121,7 +101,7 @@
                 <!-- Main Headline -->
                 <h1 class="text-4xl sm:text-5xl lg:text-[50px] font-extrabold tracking-tight text-slate-900 leading-[1.12]">
                     Detect Fake Reviews <br>
-                    <span class="text-[#e47911]">with Machine Learning</span>
+                    <span class="text-teal-700">with Machine Learning</span>
                 </h1>
 
                 <!-- Specialization Pill Tag -->
@@ -137,8 +117,8 @@
                 <!-- CTA Action Buttons -->
                 <div class="flex flex-wrap items-center gap-3 pt-1">
                     <a href="#audit-console" 
-                       class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#131921] hover:bg-[#232f3e] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
-                        <i class="fa-solid fa-rocket text-xs text-[#ff9900]"></i>
+                       class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-rocket text-xs text-teal-400"></i>
                         <span>Start Review Audit</span>
                     </a>
                     <a href="https://github.com/kumarsuman-dev/Fake-Review-Detection" target="_blank" rel="noreferrer"
@@ -170,7 +150,7 @@
                 
                 <!-- Floating Accuracy Rating Badge on Top Right -->
                 <div class="absolute -top-3.5 right-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-md text-xs font-bold text-slate-800">
-                    <span class="text-[#ff9900]">★</span>
+                    <span class="text-amber-500">★</span>
                     <span>4.9 / 5 Accuracy</span>
                     <span class="text-slate-400 font-normal">| 72,000+ Reviews</span>
                 </div>
@@ -186,7 +166,7 @@
                                 Live Review Audit Console
                             </span>
                         </div>
-                        <span class="px-2.5 py-1 rounded-md bg-amber-50 text-amber-900 border border-amber-200/80 text-[11px] font-bold">
+                        <span class="px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200/80 text-[11px] font-bold">
                             NLP Inference Core
                         </span>
                     </div>
@@ -194,8 +174,8 @@
                     <!-- Mode Switcher Tabs -->
                     <div class="flex items-center gap-2 mb-4 p-1 rounded-xl bg-slate-100 border border-slate-200/60 max-w-fit">
                         <button onclick="switchMode('url')" id="mode-url-btn" 
-                                class="px-3.5 py-1.5 rounded-lg bg-[#131921] text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all">
-                            <i class="fa-solid fa-link text-[11px] text-[#ff9900]"></i>
+                                class="px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-link text-[11px]"></i>
                             <span>Product URL Scanner</span>
                         </button>
                         <button onclick="switchMode('text')" id="mode-text-btn" 
@@ -216,7 +196,7 @@
                                    placeholder="Paste Amazon or Flipkart Product URL..."
                                    autocomplete="off"
                                    spellcheck="false"
-                                   class="w-full pl-11 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs sm:text-sm font-medium focus:bg-white focus:outline-none focus:border-[#ff9900] focus:ring-2 focus:ring-[#ff9900]/20 transition-all">
+                                   class="w-full pl-11 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs sm:text-sm font-medium focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/10 transition-all">
                             <button onclick="clearInput()" id="btn-clear-input" class="absolute right-3 text-slate-400 hover:text-slate-600 p-1.5 hidden transition-colors" title="Clear input">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
@@ -224,10 +204,10 @@
 
                         <!-- Action Submit Button -->
                         <button onclick="analyzeReviews()" id="btn-analyze"
-                                class="w-full py-3.5 bg-[#ffd814] hover:bg-[#f7ca00] text-[#0f1111] font-bold rounded-xl text-sm border border-[#fcd200] transition-all duration-150 flex items-center justify-center gap-2 shadow-sm hover:shadow active:scale-[0.99]">
-                            <i class="fa-solid fa-bolt text-xs text-[#d97706]"></i>
+                                class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-sm transition-all duration-150 flex items-center justify-center gap-2 shadow-sm hover:shadow active:scale-[0.99]">
+                            <i class="fa-solid fa-bolt text-xs text-amber-400"></i>
                             <span>Audit Reviews</span>
-                            <kbd class="hidden sm:inline-block ml-1 text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/10 text-slate-800">Enter ↵</kbd>
+                            <kbd class="hidden sm:inline-block ml-1 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">Enter ↵</kbd>
                         </button>
                     </div>
 
@@ -235,12 +215,12 @@
                     <div id="container-text-mode" class="hidden space-y-4">
                         <textarea id="raw-review-text" rows="3"
                                   placeholder="Type or paste any product review here to test against the model..."
-                                  class="w-full p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs sm:text-sm font-medium focus:bg-white focus:outline-none focus:border-[#ff9900] focus:ring-2 focus:ring-[#ff9900]/20 resize-none transition-all"></textarea>
+                                  class="w-full p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs sm:text-sm font-medium focus:bg-white focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/10 resize-none transition-all"></textarea>
                         
                         <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100">
                             <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
                                 <span>Associated Rating:</span>
-                                <select id="raw-rating" class="bg-white border border-slate-200 text-slate-800 text-xs rounded-lg px-2.5 py-1.5 font-medium focus:outline-none focus:border-[#ff9900]">
+                                <select id="raw-rating" class="bg-white border border-slate-200 text-slate-800 text-xs rounded-lg px-2.5 py-1.5 font-medium focus:outline-none focus:border-teal-600">
                                     <option value="5.0">5.0 ★★★★★</option>
                                     <option value="4.0">4.0 ★★★★☆</option>
                                     <option value="3.0">3.0 ★★★☆☆</option>
@@ -249,8 +229,8 @@
                                 </select>
                             </div>
                             <button onclick="analyzeDirectText()" id="btn-analyze-text"
-                                    class="px-5 py-2.5 bg-[#ffd814] hover:bg-[#f7ca00] text-[#0f1111] font-bold rounded-xl text-xs border border-[#fcd200] transition-all flex items-center justify-center gap-2 shadow-sm">
-                                <i class="fa-solid fa-bolt text-xs text-[#d97706]"></i>
+                                    class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-bolt text-xs text-amber-400"></i>
                                 <span>Classify Review Text</span>
                             </button>
                         </div>
@@ -292,10 +272,10 @@
                         </div>
                     </div>
 
-                    <!-- Floating Confidence Badge -->
+                    <!-- Floating Confidence Badge (like "98% Clarity Rate" in user reference image) -->
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200/90 text-amber-950 font-bold">
-                            <i class="fa-solid fa-circle-check text-[#e47911]"></i>
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-teal-50 border border-teal-200/80 text-teal-900 font-bold">
+                            <i class="fa-solid fa-circle-check text-teal-700"></i>
                             <span>98% Confidence Rate • Word2Vec Embeddings</span>
                         </div>
                         <span class="text-[11px] text-slate-400 font-medium">Real-Time Engine</span>
@@ -434,7 +414,7 @@
                             <i class="fa-solid fa-magnifying-glass text-xs text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
                             <input type="text" id="filter-search" oninput="searchReviews(this.value)"
                                    placeholder="Filter review keywords..."
-                                   class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ff9900]">
+                                   class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600">
                         </div>
                         <button onclick="exportJSON()" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors" title="Export JSON">
                             <i class="fa-solid fa-code text-[11px]"></i>
@@ -460,22 +440,22 @@
         </section>
     </main>
 
-    <!-- Clean Amazon Dark Footer -->
-    <footer class="bg-[#131921] border-t border-[#232f3e] py-8 text-slate-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+    <!-- Clean SaaS Footer -->
+    <footer class="bg-white border-t border-slate-200/80 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
             <div class="flex items-center gap-3">
-                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="w-7 h-7 rounded-full border border-[#ff9900]">
-                <span class="font-bold text-white text-sm">Fake Review Detection</span>
-                <span class="text-slate-600">|</span>
-                <span class="text-slate-400">Review Authenticity & Machine Learning Verification</span>
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="w-7 h-7 rounded-full border border-slate-200">
+                <span class="font-bold text-slate-800 text-sm">Fake Review Detection</span>
+                <span class="text-slate-300">|</span>
+                <span>Review Authenticity & Machine Learning Verification</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
-                <a href="https://github.com/kumarsuman-dev/Fake-Review-Detection" target="_blank" class="text-slate-300 hover:text-[#ff9900] transition-colors flex items-center gap-1.5">
+                <a href="https://github.com/kumarsuman-dev/Fake-Review-Detection" target="_blank" class="hover:text-slate-900 transition-colors flex items-center gap-1.5">
                     <i class="fa-brands fa-github text-sm"></i>
                     <span>GitHub Repository</span>
                 </a>
-                <span class="text-slate-600">•</span>
-                <span class="text-slate-400">Open Source MIT License</span>
+                <span class="text-slate-300">•</span>
+                <span>Open Source MIT License</span>
             </div>
         </div>
     </footer>
