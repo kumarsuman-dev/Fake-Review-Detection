@@ -141,7 +141,7 @@ def analyze():
         return jsonify({"error": f"Scraping error: {str(e)}"}), 500
 
     if not reviews:
-        return jsonify({"error": "No reviews found and unable to load fallback dataset"}), 404
+        return jsonify({"error": notice_message or "No customer reviews found for this product listing."}), 404
 
     preprocessed_reviews = []
     for item in reviews:
