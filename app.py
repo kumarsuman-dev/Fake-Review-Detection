@@ -1,7 +1,6 @@
 import os
 import sys
-from flask import Flask, render_template, request, jsonify
-from scraper import scrape_reviews
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from preprocessing import preprocess_text
 
 # Get absolute directory path
@@ -31,7 +30,29 @@ def get_models():
 @app.route("/api")
 @app.route("/api/index")
 def index():
-    return render_template("index.html")
+    try:
+        return render_template("index.html")
+    except Exception as e:
+        # Fallback if template is located in alternate path in serverless container
+        alt_paths = [
+            os.path.join(basedir, "templates", "index.html"),
+            os.path.join(os.getcwd(), "templates", "index.html"),
+            os.path.join(os.path.dirname(basedir), "templates", "index.html"),
+            os.path.join("/var/task", "templates", "index.html")
+        ]
+        for p in alt_paths:
+            if os.path.exists(p):
+                with open(p, "r", encoding="utf-8") as f:
+                    return f.read(), 200, {"Content-Type": "text/html; charset=utf-8"}
+        return f"Template Error: {str(e)} | Basedir: {basedir} | CWD: {os.getcwd()} | Files: {os.listdir(basedir) if os.path.exists(basedir) else []}", 500
+
+@app.route("/static/<path:filename>")
+def serve_static(filename):
+    for base in [os.path.join(basedir, "statics"), os.path.join(os.getcwd(), "statics"), os.path.join("/var/task", "statics")]:
+        fp = os.path.join(base, filename)
+        if os.path.exists(fp):
+            return send_from_directory(base, filename)
+    return f"Static file {filename} not found", 404
 
 @app.route("/api/health")
 @app.route("/health")
@@ -114,6 +135,7 @@ def analyze():
         return jsonify({"error": "No URL or review text provided"}), 400
 
     try:
+        from scraper import scrape_reviews
         reviews, is_demo, platform_name, notice_message = scrape_reviews(url)
     except Exception as e:
         return jsonify({"error": f"Scraping error: {str(e)}"}), 500
