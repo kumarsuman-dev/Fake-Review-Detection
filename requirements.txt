@@ -10,6 +10,7 @@ scipy==1.13.1
 joblib==1.4.2
 
 # NLP
+nltk==3.9.1
 gensim==4.3.3
 emoji==2.12.1
 
