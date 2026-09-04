@@ -1,9 +1,6 @@
-# Fake Review Detection dependencies
-
 # Web Framework
 Flask==3.1.0
 Werkzeug==3.1.3
-gunicorn==23.0.0
 
 # Data & ML
 numpy==1.26.4
@@ -13,11 +10,8 @@ scipy==1.13.1
 joblib==1.4.2
 
 # NLP
-nltk==3.9.1
 gensim==4.3.3
-textblob==0.18.0
 emoji==2.12.1
-langdetect==1.0.9
 
 # Web Scraping & TLS Impersonation
 requests==2.32.3
