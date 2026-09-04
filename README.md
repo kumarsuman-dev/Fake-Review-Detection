@@ -1,6 +1,6 @@
-# 🛡️ SENTINEL — E-Commerce Review Integrity & Synthetic Manipulation Detection Engine
+# SENTINEL - E-Commerce Review Integrity & Synthetic Manipulation Detection Engine
 
-> **End-to-end Machine Learning & NLP intelligence system that audits live e-commerce reviews (Amazon, Flipkart, Walmart) in real time, generates 100-dimensional semantic embeddings, and detects computer-generated/synthetic review manipulation using Linear SVM.**
+> End-to-end Machine Learning & NLP system that audits live e-commerce reviews (Amazon, Flipkart, Walmart) in real time, generates 100-dimensional semantic embeddings, and detects computer-generated/synthetic review manipulation using Linear SVM.
 
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python&style=flat-square)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.1.0-lightgrey?logo=flask&style=flat-square)](https://flask.palletsprojects.com/)
@@ -10,7 +10,7 @@
 
 ---
 
-## 🌟 Overview
+## Overview
 
 **SENTINEL** is an engineering-first review verification platform designed to combat the rising proliferation of AI-generated and fraudulent consumer reviews. 
 
@@ -18,21 +18,21 @@ Instead of relying solely on keyword matching or static heuristics, Sentinel com
 
 ---
 
-## ✨ Core Features
+## Core Features
 
-- **🌐 Live Multi-Platform Scraping:**
+- **Live Multi-Platform Scraping:**
   - **Amazon Engine:** Direct ASIN extraction, TLS/JA3 fingerprint impersonation (`curl_cffi`) and review page traversal.
   - **Flipkart Engine:** Live `window.__INITIAL_STATE__` JSON hydration parsing with multi-page pagination (`page=1..3`), extracting 30+ verified customer reviews per run.
   - **Direct Text Auditor:** Evaluate offline or unformatted review texts directly with custom star ratings.
 
-- **🧠 Machine Learning & NLP Pipeline:**
+- **Machine Learning & NLP Pipeline:**
   - Full NLP text normalization, tokenization, stopword filtering, and punctuation removal.
   - 100-dimensional continuous dense vector generation via custom **Word2Vec (Gensim)** model.
   - Feature concatenation with normalized review length and star ratings (102-dimensional feature space).
   - High-confidence binary classification: **Organic (OR)** vs. **Synthetic / Computer-Generated (CG)**.
 
-- **📊 Modern Telemetry Dashboard:**
-  - Top 1% UI/UX Obsidian dark design system with dot-grid styling and zero visual clutter.
+- **Telemetry Dashboard:**
+  - Obsidian dark design system with dot-grid styling and clear metric readouts.
   - Real-time **Trust Index (%)** calculation with Risk Level categorizations (Low, Moderate, High Risk).
   - Real-time client-side keyword search & Organic vs. Synthetic tab filtering.
   - One-click export to **JSON telemetry** and **CSV datasets**.
@@ -40,34 +40,34 @@ Instead of relying solely on keyword matching or static heuristics, Sentinel com
 
 ---
 
-## 🏗️ Architecture & Pipeline Flow
+## Architecture & Pipeline Flow
 
 ```
 Product URL (Amazon / Flipkart / Walmart)  OR  Direct Review Text
-                        │
-                        ▼
+                        |
+                        v
          Universal Live Scraper (scraper.py)
-   (curl_cffi Chrome Impersonation + JSON State Parsing)
-                        │
-                        ▼
-         NLP Preprocessing (preprocessing.py)
-       (Lowercasing, Regex Cleaning, Stopword Removal)
-                        │
-                        ▼
-         Word2Vec 100D Vectorization (model.py)
-         + Metadata Features (Length & Rating)
-                        │
-                        ▼
-           Linear SVM Classification Core
-                        │
-                        ▼
-        Real-Time Telemetry & Trust Analytics UI
-          (Trust Index, Risk Badges, JSON/CSV Export)
+    (curl_cffi Chrome Impersonation + JSON State Parsing)
+                        |
+                        v
+          NLP Preprocessing (preprocessing.py)
+        (Lowercasing, Regex Cleaning, Stopword Removal)
+                        |
+                        v
+          Word2Vec 100D Vectorization (model.py)
+          + Metadata Features (Length & Rating)
+                        |
+                        v
+            Linear SVM Classification Core
+                        |
+                        v
+         Real-Time Telemetry & Trust Analytics UI
+           (Trust Index, Risk Badges, JSON/CSV Export)
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Component | Technologies |
 |---|---|
@@ -80,7 +80,7 @@ Product URL (Amazon / Flipkart / Walmart)  OR  Direct Review Text
 
 ---
 
-## 🚀 Quick Start Guide
+## Quick Start Guide
 
 ### 1. Clone the Repository
 ```bash
@@ -112,11 +112,11 @@ python app.py
 ```
 
 Open your browser and navigate to:
-👉 **`http://localhost:5001`**
+**`http://localhost:5001`**
 
 ---
 
-## 📖 Usage Modes
+## Usage Modes
 
 ### Mode 1: Product URL Scanner
 1. Paste any Amazon or Flipkart product link into the console.
@@ -130,7 +130,7 @@ Open your browser and navigate to:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Aviral**  
 - GitHub: [@AviralNITW](https://github.com/AviralNITW)  
@@ -138,5 +138,5 @@ Open your browser and navigate to:
 
 ---
 
-## 📜 License
+## License
 This project is open source and available under the [MIT License](LICENSE).

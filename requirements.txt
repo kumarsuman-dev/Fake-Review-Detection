@@ -1,7 +1,4 @@
-# ─────────────────────────────────────────────
-# Fake Review Detection — Clean requirements.txt
-# Works on Render, Railway, and any clean Python env
-# ─────────────────────────────────────────────
+# Fake Review Detection dependencies
 
 # Web Framework
 Flask==3.1.0
