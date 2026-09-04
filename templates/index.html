@@ -75,7 +75,9 @@
             <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
                 <a href="#hero" class="hover:text-teal-700 transition-colors">Home</a>
                 <a href="#audit-console" class="hover:text-teal-700 transition-colors">Live Auditor</a>
-                <a href="#pipeline-section" class="hover:text-teal-700 transition-colors">ML Architecture</a>
+                <a href="#pipeline-section" class="hover:text-teal-700 transition-colors">Architecture</a>
+                <a href="#signals-section" class="hover:text-teal-700 transition-colors">Detection Signals</a>
+                <a href="#faq-section" class="hover:text-teal-700 transition-colors">FAQ</a>
             </div>
 
             <!-- Action Button -->
@@ -499,6 +501,106 @@
                     <h3 class="font-bold text-slate-900 text-sm">Linear SVM Classifier</h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Computes the separating decision hyperplane to output high-confidence predictions: Genuine Organic vs. Computer-Generated manipulation.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Detection Signals Section -->
+        <section id="signals-section" class="mt-20 pt-10 border-t border-slate-200/80">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Analytical Metrics</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                    Key Review Manipulation Signals
+                </h2>
+                <p class="text-slate-500 text-sm mt-2">
+                    How our Natural Language Processing engine spots computer-generated and bot-manipulated customer reviews.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 text-lg">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">Semantic Coherence & Clichés</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                        Word2Vec vector clustering detects repetitive generic phrasing ("best product in the world", "outstanding seller") that bots and LLM generators frequently reuse without concrete details.
+                    </p>
+                </div>
+
+                <div class="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 text-lg">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">Length vs. Rating Correlation</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                        Combines token length with star ratings in the 102D feature space. Unnatural patterns like 5-star ratings paired with ultra-brief praise are heavily penalized by the SVM hyperplane.
+                    </p>
+                </div>
+
+                <div class="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-700 text-lg">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">Syntactic & Text Anomaly Profiling</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                        Tracks uppercase character density, average word length, and punctuation anomalies to isolate scripted bot posts from genuine organic consumer experiences.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Frequently Asked Questions Section -->
+        <section id="faq-section" class="mt-20 pt-10 border-t border-slate-200/80 mb-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Need Help?</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-slate-500 text-sm mt-2">
+                    Common questions regarding model performance, store compatibility, and review auditing.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-slate-300 transition-colors">
+                    <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-question text-teal-600 text-base"></i>
+                        How does the model differentiate between real and computer-generated reviews?
+                    </h4>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-2 pl-6 leading-relaxed">
+                        The pipeline normalizes review text with stemming and stopword filtering, then converts it into 100-dimensional Word2Vec semantic vectors. Combined with star ratings and review length (102 dimensions), a Linear Support Vector Machine trained on 72,000+ labeled reviews calculates a decision hyperplane to identify whether the review is organic or synthetic.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-slate-300 transition-colors">
+                    <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-question text-teal-600 text-base"></i>
+                        Which e-commerce stores can I audit?
+                    </h4>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-2 pl-6 leading-relaxed">
+                        You can paste product links directly from Amazon and Flipkart into the <strong>Product URL Scanner</strong>. For platforms like Walmart, Shopify, eBay, or any offline customer feedback, simply switch to <strong>Direct Review Text</strong> mode to audit any review instantly.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-slate-300 transition-colors">
+                    <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-question text-teal-600 text-base"></i>
+                        What happens when an e-commerce site blocks scraping with a CAPTCHA?
+                    </h4>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-2 pl-6 leading-relaxed">
+                        To prevent application errors, our universal scraper features an automatic benchmark fallback. If Amazon or Flipkart anti-bot systems block automated headless scraping, the system loads verified category benchmark datasets so you can evaluate the classifier with uninterrupted telemetry.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-slate-300 transition-colors">
+                    <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-question text-teal-600 text-base"></i>
+                        Can I export the audit analysis data?
+                    </h4>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-2 pl-6 leading-relaxed">
+                        Yes! Once any audit completes, you can copy the raw <strong>JSON</strong> telemetry to your clipboard or click <strong>CSV</strong> to download the full dataset with individual confidence scores, ratings, and classifications.
                     </p>
                 </div>
             </div>
