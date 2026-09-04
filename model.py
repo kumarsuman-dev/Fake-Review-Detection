@@ -59,8 +59,12 @@ def load_models():
     """
     Loads the pre-trained Word2Vec model and the SVM model.
     """
-    word2vec_model = Word2Vec.load('word2vec_model.model')
-    svm_model = joblib.load('SVM_model.pkl')
+    import os
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    w2v_path = os.path.join(base_dir, 'word2vec_model.model')
+    svm_path = os.path.join(base_dir, 'SVM_model.pkl')
+    word2vec_model = Word2Vec.load(w2v_path)
+    svm_model = joblib.load(svm_path)
     return word2vec_model, svm_model
 
 # Function to classify reviews using Word2Vec and SVM

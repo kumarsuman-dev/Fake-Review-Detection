@@ -10,6 +10,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # Initialize Flask app
 app = Flask(
     __name__,
+    template_folder=os.path.join(basedir, "templates"),
     static_folder=os.path.join(basedir, "statics"),
     static_url_path="/static"
 )
