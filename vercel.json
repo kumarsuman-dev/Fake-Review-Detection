@@ -1,4 +1,11 @@
 {
+  "functions": {
+    "api/index.py": {
+      "includeFiles": "{templates/**,statics/**,SVM_model.pkl,word2vec_model.model,model.py,preprocessing.py,scraper.py,app.py}",
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",

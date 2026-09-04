@@ -1,10 +1,10 @@
 import os
+import sys
 from flask import Flask, render_template, request, jsonify
 from scraper import scrape_reviews
-from model import load_models, classify_reviews
 from preprocessing import preprocess_text
 
-# Get the absolute path to the directory where app.py is located
+# Get absolute directory path
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Initialize Flask app
@@ -15,23 +15,52 @@ app = Flask(
     static_url_path="/static"
 )
 
-# Load models at application startup
-word2vec_model, svm_model = load_models()
+# Global model holders
+_word2vec_model = None
+_svm_model = None
+
+def get_models():
+    """Lazy load models with error catching to ensure serverless resilience."""
+    global _word2vec_model, _svm_model
+    if _word2vec_model is None or _svm_model is None:
+        from model import load_models
+        _word2vec_model, _svm_model = load_models()
+    return _word2vec_model, _svm_model
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+@app.route("/api/health")
+def health():
+    models_ready = False
+    model_err = None
+    try:
+        w2v, svm = get_models()
+        models_ready = (w2v is not None and svm is not None)
+    except Exception as e:
+        model_err = str(e)
+
+    return jsonify({
+        "status": "healthy",
+        "models_ready": models_ready,
+        "model_error": model_err,
+        "python_version": sys.version,
+        "basedir": basedir,
+        "cwd": os.getcwd()
+    })
+
 @app.route("/analyze", methods=["POST"])
 def analyze():
     """
     API endpoint to analyze reviews from any e-commerce product URL or direct raw review text.
-    - Scrapes reviews using scrape_reviews() if URL is provided.
-    - Direct classification if raw review text is supplied.
-    - Preprocesses reviews using preprocess_text().
-    - Classifies reviews using the trained SVM model.
-    - Returns structured analysis results as JSON.
     """
+    try:
+        from model import classify_reviews
+        w2v_model, svm_clf = get_models()
+    except Exception as e:
+        return jsonify({"error": f"Model loading failed: {str(e)}"}), 500
+
     data = request.json or {}
     url = data.get("url", "").strip()
     raw_text = data.get("text", "").strip()
@@ -52,7 +81,7 @@ def analyze():
                 "Original Review Text": review_text_raw
             })
 
-        detailed_predictions = classify_reviews(preprocessed_reviews, word2vec_model, svm_model)
+        detailed_predictions = classify_reviews(preprocessed_reviews, w2v_model, svm_clf)
 
         response_reviews = []
         for r, p in zip(preprocessed_reviews, detailed_predictions):
@@ -78,8 +107,12 @@ def analyze():
     if not url:
         return jsonify({"error": "No URL or review text provided"}), 400
 
-    reviews, is_demo, platform_name, notice_message = scrape_reviews(url)
-    if reviews.empty:
+    try:
+        reviews, is_demo, platform_name, notice_message = scrape_reviews(url)
+    except Exception as e:
+        return jsonify({"error": f"Scraping error: {str(e)}"}), 500
+
+    if reviews is None or reviews.empty:
         return jsonify({"error": "No reviews found and unable to load fallback dataset"}), 404
 
     if "Review Text" not in reviews.columns or "Rating" not in reviews.columns:
@@ -91,7 +124,7 @@ def analyze():
 
         try:
             rating = float(reviews.iloc[i]["Rating"])
-        except ValueError:
+        except (ValueError, IndexError):
             rating = 3.0
 
         preprocessed_reviews.append({
@@ -100,7 +133,7 @@ def analyze():
             "Original Review Text": review_text_raw
         })
 
-    detailed_predictions = classify_reviews(preprocessed_reviews, word2vec_model, svm_model)
+    detailed_predictions = classify_reviews(preprocessed_reviews, w2v_model, svm_clf)
 
     response_reviews = []
     for r, p in zip(preprocessed_reviews, detailed_predictions):

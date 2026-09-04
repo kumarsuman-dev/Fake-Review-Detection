@@ -57,12 +57,31 @@ def train_and_save_models():
 # Function to load trained models
 def load_models():
     """
-    Loads the pre-trained Word2Vec model and the SVM model.
+    Loads the pre-trained Word2Vec model and the SVM model with multi-path resolution.
     """
     import os
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    w2v_path = os.path.join(base_dir, 'word2vec_model.model')
-    svm_path = os.path.join(base_dir, 'SVM_model.pkl')
+    search_dirs = [
+        base_dir,
+        os.getcwd(),
+        os.path.abspath(os.path.join(base_dir, "..")),
+        "/var/task"
+    ]
+
+    w2v_path = None
+    svm_path = None
+
+    for d in search_dirs:
+        cand_w2v = os.path.join(d, 'word2vec_model.model')
+        cand_svm = os.path.join(d, 'SVM_model.pkl')
+        if not w2v_path and os.path.exists(cand_w2v):
+            w2v_path = cand_w2v
+        if not svm_path and os.path.exists(cand_svm):
+            svm_path = cand_svm
+
+    w2v_path = w2v_path or os.path.join(base_dir, 'word2vec_model.model')
+    svm_path = svm_path or os.path.join(base_dir, 'SVM_model.pkl')
+
     word2vec_model = Word2Vec.load(w2v_path)
     svm_model = joblib.load(svm_path)
     return word2vec_model, svm_model
