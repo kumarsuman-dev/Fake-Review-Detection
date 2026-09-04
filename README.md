@@ -1,166 +1,142 @@
-# 🕵️‍♂️ Fake Review Detection Web App
+# 🛡️ SENTINEL — E-Commerce Review Integrity & Synthetic Manipulation Detection Engine
 
-Detect fraudulent Amazon product reviews and shop smarter!  
-Empowered by AI, NLP, and machine learning, this web app classifies reviews as **Real** or **Fake** and generates AI-powered summaries to help you make informed decisions.
+> **End-to-end Machine Learning & NLP intelligence system that audits live e-commerce reviews (Amazon, Flipkart, Walmart) in real time, generates 100-dimensional semantic embeddings, and detects computer-generated/synthetic review manipulation using Linear SVM.**
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://fake-review-detection-omega.vercel.app)
-![Fake Review Detection Banner](https://img.shields.io/badge/AI-Powered-blueviolet?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&style=flat-square)
-![Flask](https://img.shields.io/badge/Flask-Backend-lightgrey?logo=flask&style=flat-square)
-![Scikit-learn](https://img.shields.io/badge/Scikit--learn-ML-orange?logo=scikit-learn&style=flat-square)
-![Gensim](https://img.shields.io/badge/Gensim-NLP-green?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
-
-<br>
-
-## 🌐 Live Demo
-
-👉 **<a href="https://fake-review-detection-omega.vercel.app" target="_blank">https://fake-review-detection-omega.vercel.app</a>**
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python&style=flat-square)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.1.0-lightgrey?logo=flask&style=flat-square)](https://flask.palletsprojects.com/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-SVM-orange?logo=scikit-learn&style=flat-square)](https://scikit-learn.org/)
+[![Gensim](https://img.shields.io/badge/Gensim-Word2Vec-green?style=flat-square)](https://radimrehurek.com/gensim/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
 ---
 
-## 🚀 Features
+## 🌟 Overview
 
-- 🔎 **Detect Fake Reviews** — Classifies Amazon reviews as **Real (Original)** or **Fake (Computer Generated)**
-- 🤖 **AI-Powered Summaries** — Generates concise summaries using **Gemini API**
-- 🌐 **Web Scraping** — Fetches reviews directly from Amazon product pages
-- 📊 **Confidence Score** — Shows prediction confidence, word count, and text analysis metrics
-- 💡 **User-Friendly Interface** — Modern, responsive design with Tailwind CSS
-- 🔒 **Enhances Shopping Trust** — Makes online shopping safer and smarter
+**SENTINEL** is an engineering-first review verification platform designed to combat the rising proliferation of AI-generated and fraudulent consumer reviews. 
+
+Instead of relying solely on keyword matching or static heuristics, Sentinel combines **TLS-impersonated live scraping** with **100-dimensional semantic Word2Vec vector embeddings** and a **Linear Support Vector Machine (SVM)** classifier trained on 72,000+ labeled organic and synthetic reviews.
 
 ---
 
-## 🛠️ Built With
+## ✨ Core Features
 
-| Technology | Purpose |
-|---|---|
-| **Python 3.x** | Core programming language |
-| **Flask** | Web framework / Backend server |
-| **Scikit-learn (SVM)** | Review classification model |
-| **Gensim (Word2Vec)** | Text embedding / NLP |
-| **NLTK** | Natural language preprocessing |
-| **Gemini API** | AI-powered review summarization |
-| **HTML / JavaScript** | Frontend interface |
-| **Tailwind CSS** | UI styling |
+- **🌐 Live Multi-Platform Scraping:**
+  - **Amazon Engine:** Direct ASIN extraction, TLS/JA3 fingerprint impersonation (`curl_cffi`) and review page traversal.
+  - **Flipkart Engine:** Live `window.__INITIAL_STATE__` JSON hydration parsing with multi-page pagination (`page=1..3`), extracting 30+ verified customer reviews per run.
+  - **Direct Text Auditor:** Evaluate offline or unformatted review texts directly with custom star ratings.
 
----
+- **🧠 Machine Learning & NLP Pipeline:**
+  - Full NLP text normalization, tokenization, stopword filtering, and punctuation removal.
+  - 100-dimensional continuous dense vector generation via custom **Word2Vec (Gensim)** model.
+  - Feature concatenation with normalized review length and star ratings (102-dimensional feature space).
+  - High-confidence binary classification: **Organic (OR)** vs. **Synthetic / Computer-Generated (CG)**.
 
-## 📸 Screenshots
-
->
-![Home Page](assets/1.png)
-![Result](assets/2.png)
-![Result](assets/3.png)
+- **📊 Modern Telemetry Dashboard:**
+  - Top 1% UI/UX Obsidian dark design system with dot-grid styling and zero visual clutter.
+  - Real-time **Trust Index (%)** calculation with Risk Level categorizations (Low, Moderate, High Risk).
+  - Real-time client-side keyword search & Organic vs. Synthetic tab filtering.
+  - One-click export to **JSON telemetry** and **CSV datasets**.
+  - Expandable per-review diagnostic panels displaying confidence scores, token counts, uppercase ratios, and average word lengths.
 
 ---
 
-## 🚚 Getting Started
+## 🏗️ Architecture & Pipeline Flow
 
-### Prerequisites
-
-- Python 3.x
-- pip (Python package manager)
-
-### Installation
-
-```bash
-git clone https://github.com/kumarsuman-dev/Fake-Review-Detection.git
-cd Fake-Review-Detection
+```
+Product URL (Amazon / Flipkart / Walmart)  OR  Direct Review Text
+                        │
+                        ▼
+         Universal Live Scraper (scraper.py)
+   (curl_cffi Chrome Impersonation + JSON State Parsing)
+                        │
+                        ▼
+         NLP Preprocessing (preprocessing.py)
+       (Lowercasing, Regex Cleaning, Stopword Removal)
+                        │
+                        ▼
+         Word2Vec 100D Vectorization (model.py)
+         + Metadata Features (Length & Rating)
+                        │
+                        ▼
+           Linear SVM Classification Core
+                        │
+                        ▼
+        Real-Time Telemetry & Trust Analytics UI
+          (Trust Index, Risk Badges, JSON/CSV Export)
 ```
 
-### Setup Virtual Environment
+---
 
+## 🛠️ Tech Stack
+
+| Component | Technologies |
+|---|---|
+| **Language** | Python 3.10+ |
+| **Backend & API** | Flask, Werkzeug, Gunicorn |
+| **Machine Learning** | Scikit-Learn (Linear SVM), SciPy, NumPy, Pandas, Joblib |
+| **Natural Language Processing** | Gensim (Word2Vec), NLTK, TextBlob, Langdetect |
+| **Scraping & Networking** | `curl_cffi` (TLS/JA3 Browser Impersonation), BeautifulSoup4, lxml |
+| **Frontend & UI/UX** | HTML5, Tailwind CSS, JavaScript (ES6+), FontAwesome, Plus Jakarta Sans, JetBrains Mono |
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/AviralNITW/Senitel.git
+cd Senitel
+```
+
+### 2. Set Up Virtual Environment
 ```bash
 # Create virtual environment
-python3 -m venv venv
+python -m venv venv
 
-# Activate virtual environment
-source venv/bin/activate          # macOS / Linux
-venv\Scripts\activate             # Windows
+# Activate on Windows
+venv\Scripts\activate
 
-# Upgrade pip
-python3 -m pip install --upgrade pip
+# Activate on macOS/Linux
+source venv/bin/activate
+```
 
-# Install dependencies
+### 3. Install Dependencies
+```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Run the App
-
+### 4. Run the Application
 ```bash
-python3 app.py
+python app.py
 ```
 
-Open your browser and go to 👉 `http://localhost:5001`
-
-### Stop the Server
-
-```
-Press Ctrl + C
-```
-
-Then deactivate the virtual environment:
-
-```bash
-deactivate
-```
+Open your browser and navigate to:
+👉 **`http://localhost:5001`**
 
 ---
 
-## 🎯 Usage
+## 📖 Usage Modes
 
-1. Open the app at `http://localhost:5001`
-2. Enter or paste an **Amazon product URL**
-3. The app **scrapes and analyzes** the reviews automatically
-4. Results display which reviews are **Real ✅** or **Fake ❌**
-5. Each result includes:
-   - Prediction label
-   - Confidence score
-   - Word count & text statistics
-6. Get **AI-powered summaries** for quick insights
+### Mode 1: Product URL Scanner
+1. Paste any Amazon or Flipkart product link into the console.
+2. Click **Audit Reviews** (or hit `Enter`).
+3. SENTINEL automatically extracts live customer reviews, passes them through the inference pipeline, and visualizes the aggregate Trust Index.
 
----
-
-## 🧠 How It Works
-
-```
-Amazon URL
-    ↓
-Web Scraper (scraper.py)
-    ↓
-Text Preprocessing (preprocessing.py)
-    ↓
-Word2Vec Embeddings + Feature Extraction
-    ↓
-SVM Classifier (SVM_model.pkl)
-    ↓
-Real / Fake Prediction + Confidence Score
-    ↓
-Gemini API → AI Summary
-    ↓
-Results displayed on Web UI
-```
+### Mode 2: Direct Review Text Auditor
+1. Switch to **Direct Review Text** mode.
+2. Paste any single or multi-line product review.
+3. Select the associated star rating and click **Classify Review Text** for instant anomaly telemetry.
 
 ---
 
-## 🙏 Acknowledgements
+## 👨‍💻 Author
 
-- [Scikit-learn](https://scikit-learn.org/) — Machine learning library
-- [Gensim](https://radimrehurek.com/gensim/) — Word2Vec NLP model
-- [Flask](https://flask.palletsprojects.com/) — Lightweight web framework
-- [NLTK](https://www.nltk.org/) — Natural language processing toolkit
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS framework
-- [Gemini API](https://ai.google.dev/gemini-api/docs) — Google AI summarization
-- Inspired by the need for **trustworthy online shopping**!
+**Aviral**  
+- GitHub: [@AviralNITW](https://github.com/AviralNITW)  
+- Repository: [https://github.com/AviralNITW/Senitel](https://github.com/AviralNITW/Senitel)
 
 ---
 
-## 👨‍💻 Developer
-
-**Suman Kumar**
-- GitHub: [@kumarsuman-dev](https://github.com/kumarsuman-dev)
-- 🌐 Live App: <a href="https://fake-review-detection-omega.vercel.app" target="_blank">fake-review-detection-omega.vercel.app</a>
-
----
-
-> _Enhance your shopping trust. Detect fake reviews with AI power!_ 🛡️
+## 📜 License
+This project is open source and available under the [MIT License](LICENSE).

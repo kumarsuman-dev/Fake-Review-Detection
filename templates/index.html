@@ -1,205 +1,388 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake Review Detector - Advanced AI Review Analysis</title>
+    <title>SENTINEL — E-Commerce Review Integrity & Synthetic Detection Engine</title>
+    
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='logo.jpg') }}">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='logo.jpg') }}">
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font: Outfit (Very modern & sleek) -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'Menlo', 'monospace'],
+                    },
+                    colors: {
+                        canvas: '#090a0f',
+                        surface: {
+                            50: '#1e2433',
+                            100: '#181d2a',
+                            200: '#121622',
+                            300: '#0d101a',
+                        },
+                        border: {
+                            subtle: 'rgba(255, 255, 255, 0.07)',
+                            muted: 'rgba(255, 255, 255, 0.12)',
+                            active: 'rgba(255, 255, 255, 0.22)',
+                        },
+                        brand: {
+                            primary: '#f8fafc',
+                            secondary: '#94a3b8',
+                            muted: '#64748b',
+                        },
+                        status: {
+                            real: '#10b981',
+                            fake: '#f43f5e',
+                            warn: '#f59e0b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Icons: Lucide & FontAwesome for precision glyphs -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts: Plus Jakarta Sans (UI) & JetBrains Mono (Telemetry/Data) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bespoke Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Javascript -->
+    
+    <!-- Application Logic -->
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
-<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100 font-outfit min-h-screen flex flex-col items-center justify-start p-4 md:p-8 antialiased">
-    
-    <!-- Outer Glow Effects -->
-    <div class="glow-bg glow-purple"></div>
-    <div class="glow-bg glow-blue"></div>
+<body class="bg-canvas text-slate-100 font-sans min-h-screen antialiased selection:bg-slate-700 selection:text-white flex flex-col justify-between">
 
-    <main class="w-full max-w-5xl z-10">
+    <!-- Subtle Engineering Background Grid -->
+    <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-radial-glow pointer-events-none z-0"></div>
+
+    <!-- Main Application Wrapper -->
+    <div class="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         
-        <!-- Header -->
-        <header class="text-center mb-8 animate-fade-in">
-            <div class="inline-flex items-center justify-center mb-4">
-                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Fake Review Detector Logo" class="w-20 h-20 rounded-full shadow-lg shadow-indigo-500/40 border-2 border-indigo-500/30">
+        <!-- Top Navigation / System Status Bar -->
+        <nav class="flex items-center justify-between pb-6 mb-8 border-b border-border-subtle">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-surface-100 border border-border-muted flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-shield-halved text-slate-200 text-sm"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-sm tracking-tight text-white">SENTINEL</span>
+                        <span class="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-surface-50 text-slate-400 border border-border-subtle">v1.2 // SVM-100D</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 font-medium">Review Authenticity & Anomaly Detection</p>
+                </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400">
-                Fake Review Detector
+
+            <!-- Telemetry Indicator -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-200 border border-border-subtle text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-slate-400">ML Core:</span>
+                    <span class="text-slate-200 font-medium">Active (72k Rows)</span>
+                </div>
+                <a href="https://github.com/AviralNITW/Senitel" target="_blank" rel="noreferrer"
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-50 border border-border-muted hover:border-border-active text-xs text-slate-300 hover:text-white transition-all duration-150">
+                    <i class="fa-brands fa-github text-sm"></i>
+                    <span class="hidden md:inline font-medium">Source</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Header / Hero Section -->
+        <header class="max-w-3xl mb-10">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-200 border border-border-subtle text-[11px] font-mono text-slate-400 mb-4">
+                <span class="text-emerald-400 font-semibold">● INFERENCE ENGINE</span>
+                <span class="text-slate-600">|</span>
+                <span>Word2Vec Vectorization + Linear SVM</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                Inspect E-Commerce Reviews for Synthetic Manipulation.
             </h1>
-            <p class="text-slate-400 text-lg md:text-xl mt-3 max-w-2xl mx-auto font-light">
-                Analyze reviews using machine learning to instantly flag computer-generated and suspicious product feedback.
+            <p class="text-slate-400 text-base sm:text-lg mt-3 font-normal leading-relaxed">
+                Extract live product feedback, generate 100-dimensional semantic embeddings, and classify reviews as genuine human experiences or computer-generated fabrications.
             </p>
         </header>
 
-        <!-- Search Bar & Demo Section -->
-        <section class="glass-panel p-6 md:p-8 rounded-2xl mb-8 border border-white/10 shadow-2xl animate-slide-up">
-            <h2 class="text-xl font-semibold mb-4 text-slate-200 flex items-center gap-2">
-                <i class="fa-solid fa-magnifying-glass text-indigo-400"></i> Start Analysis
-            </h2>
-            
-            <div class="relative flex flex-col md:flex-row gap-3">
-                <div class="relative flex-1">
-                    <i class="fa-brands fa-amazon absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="text" id="url" placeholder="Paste Amazon Product URL (e.g., https://www.amazon.com/dp/B0BP7M277Z)"
-                           class="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-900/60 border border-slate-700/80 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-slate-100 placeholder-slate-500 text-base transition-all duration-300">
-                </div>
-                
-                <div class="flex gap-2">
-                    <button onclick="analyzeReviews()" id="btn-analyze"
-                            class="flex-1 md:flex-initial px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold rounded-xl shadow-lg shadow-emerald-500/10 hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> Run Detection
-                    </button>
-                    <button onclick="clearResults()"
-                            class="px-5 py-4 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl border border-slate-700 transition-all duration-300">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                </div>
+        <!-- Command Input & Inspection Console -->
+        <section class="mb-10">
+            <!-- Mode Switcher -->
+            <div class="flex items-center gap-2 mb-3">
+                <button onclick="switchMode('url')" id="mode-url-btn" class="px-3 py-1.5 rounded-lg bg-surface-100 border border-border-active text-xs font-medium text-white flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-link text-[11px] text-emerald-400"></i>
+                    <span>Product URL Scanner</span>
+                </button>
+                <button onclick="switchMode('text')" id="mode-text-btn" class="px-3 py-1.5 rounded-lg bg-surface-200 border border-border-subtle text-xs font-medium text-slate-400 hover:text-slate-200 flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-align-left text-[11px]"></i>
+                    <span>Direct Review Text</span>
+                </button>
             </div>
 
-            <!-- Quick Demo Row -->
-            <div class="mt-6 pt-6 border-t border-white/5">
-                <p class="text-sm font-medium text-slate-400 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-play text-indigo-400"></i> Try clicking a sample product below:
-                </p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <button onclick="loadDemoProduct('headphones')" 
-                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
-                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">Audio</div>
-                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Sony XM4 Headphones</div>
-                    </button>
-                    <button onclick="loadDemoProduct('kindle')" 
-                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
-                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">E-Reader</div>
-                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Kindle Paperwhite</div>
-                    </button>
-                    <button onclick="loadDemoProduct('chair')" 
-                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
-                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">Furniture</div>
-                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Ergonomic Office Chair</div>
-                    </button>
-                    <button onclick="loadDemoProduct('generic')" 
-                            class="demo-card text-left p-3 rounded-xl bg-slate-900/40 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-500/30 transition-all duration-300 group">
-                        <div class="text-xs text-indigo-400 font-semibold mb-1 uppercase tracking-wider">General</div>
-                        <div class="text-sm font-bold text-slate-200 group-hover:text-indigo-300 truncate">Product Review Demo</div>
-                    </button>
+            <div class="surface-card p-2 sm:p-3 rounded-2xl border border-border-muted shadow-2xl transition-all duration-200 focus-within:border-border-active focus-within:ring-1 focus-within:ring-white/10">
+                
+                <!-- URL Scanner Container -->
+                <div id="container-url-mode" class="flex flex-col md:flex-row items-stretch gap-2">
+                    
+                    <!-- Search Input Box with Dynamic Multi-Platform Icon -->
+                    <div class="relative flex-1 flex items-center">
+                        <div class="absolute left-4 flex items-center pointer-events-none transition-all duration-200" id="platform-icon-wrapper">
+                            <i id="platform-icon" class="fa-solid fa-globe text-base text-slate-500"></i>
+                        </div>
+                        <input type="text" id="url" 
+                               oninput="detectPlatform(this.value)"
+                               placeholder="Paste Product URL (Amazon, Walmart, Flipkart, Shopify, Best Buy, eBay)..."
+                               autocomplete="off"
+                               spellcheck="false"
+                               class="w-full pl-11 pr-10 py-3.5 rounded-xl bg-surface-300/80 border-0 text-slate-100 placeholder-slate-500 font-mono text-xs sm:text-sm focus:outline-none transition-colors">
+                        <button onclick="clearInput()" id="btn-clear-input" class="absolute right-3 text-slate-500 hover:text-slate-300 p-1.5 hidden transition-colors" title="Clear input">
+                            <i class="fa-solid fa-xmark text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Action Controls -->
+                    <div class="flex items-center gap-2">
+                        <button onclick="analyzeReviews()" id="btn-analyze"
+                                class="w-full md:w-auto px-6 py-3.5 bg-brand-primary hover:bg-white text-canvas font-semibold rounded-xl text-sm transition-all duration-150 flex items-center justify-center gap-2 shadow-sm hover:shadow active:scale-[0.98]">
+                            <i class="fa-solid fa-bolt text-xs"></i>
+                            <span>Audit Reviews</span>
+                            <kbd class="hidden lg:inline-block ml-1 text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/10 text-slate-700">↵</kbd>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Direct Text Container (Initially Hidden) -->
+                <div id="container-text-mode" class="hidden flex-col gap-2">
+                    <div class="relative">
+                        <textarea id="raw-review-text" rows="3"
+                                  placeholder="Paste any single or multi-line product review here to test against the SVM + Word2Vec model..."
+                                  class="w-full p-3.5 rounded-xl bg-surface-300/80 border-0 text-slate-100 placeholder-slate-500 font-mono text-xs sm:text-sm focus:outline-none resize-none leading-relaxed"></textarea>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-border-subtle">
+                        <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+                            <span>Rating:</span>
+                            <select id="raw-rating" class="bg-surface-200 border border-border-subtle text-slate-200 text-xs rounded px-2 py-1 focus:outline-none">
+                                <option value="5.0">5.0 ★★★★★</option>
+                                <option value="4.0">4.0 ★★★★☆</option>
+                                <option value="3.0">3.0 ★★★☆☆</option>
+                                <option value="2.0">2.0 ★★☆☆☆</option>
+                                <option value="1.0">1.0 ★☆☆☆☆</option>
+                            </select>
+                        </div>
+                        <button onclick="analyzeDirectText()" id="btn-analyze-text"
+                                class="px-6 py-2.5 bg-brand-primary hover:bg-white text-canvas font-semibold rounded-xl text-xs transition-all duration-150 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt text-xs"></i>
+                            <span>Classify Review Text</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Supported Platforms & Benchmarks Row -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-3 mt-2 px-1 border-t border-border-subtle text-xs">
+                    <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono text-slate-500">
+                        <span>COMPATIBLE:</span>
+                        <span class="platform-pill"><i class="fa-brands fa-amazon text-amber-400"></i> Amazon</span>
+                        <span class="platform-pill"><i class="fa-solid fa-asterisk text-blue-400"></i> Walmart</span>
+                        <span class="platform-pill"><i class="fa-solid fa-cart-shopping text-yellow-400"></i> Flipkart</span>
+                        <span class="platform-pill"><i class="fa-brands fa-shopify text-emerald-400"></i> Shopify</span>
+                        <span class="platform-pill"><i class="fa-brands fa-ebay text-rose-400"></i> eBay</span>
+                        <span class="platform-pill"><i class="fa-solid fa-tag text-yellow-300"></i> Best Buy</span>
+                    </div>
+
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-slate-500 font-mono text-[11px] uppercase tracking-wider">Benchmarks:</span>
+                        <button onclick="loadDemoProduct('headphones')" class="preset-btn">
+                            <i class="fa-solid fa-headphones text-[10px] text-slate-400"></i>
+                            <span>Sony XM4</span>
+                        </button>
+                        <button onclick="loadDemoProduct('kindle')" class="preset-btn">
+                            <i class="fa-solid fa-book-open text-[10px] text-slate-400"></i>
+                            <span>Kindle</span>
+                        </button>
+                        <button onclick="loadDemoProduct('chair')" class="preset-btn">
+                            <i class="fa-solid fa-chair text-[10px] text-slate-400"></i>
+                            <span>Office Chair</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Loading Indicator -->
-        <div id="loading" class="mt-8 text-center hidden animate-pulse">
-            <div class="inline-flex items-center gap-3 px-6 py-3 bg-indigo-500/10 border border-indigo-500/25 rounded-full text-indigo-300">
-                <i class="fa-solid fa-spinner animate-spin text-xl"></i>
-                <span class="text-base font-medium">Scraping reviews and runnning AI classifier...</span>
+        <!-- Loading State Indicator -->
+        <div id="loading" class="hidden my-12 py-8 text-center animate-fade-in">
+            <div class="inline-flex flex-col items-center gap-3 p-6 rounded-2xl bg-surface-200 border border-border-muted max-w-sm mx-auto shadow-xl">
+                <div class="relative w-10 h-10 flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-full border-2 border-slate-700 border-t-white animate-spin"></div>
+                    <i class="fa-solid fa-brain text-xs text-slate-300 absolute"></i>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-sm font-semibold text-white">Executing Inference Pipeline</h4>
+                    <p class="text-xs text-slate-400 font-mono mt-1">Extracting DOM ➔ Preprocessing ➔ Word2Vec ➔ SVM</p>
+                </div>
             </div>
         </div>
 
-        <!-- Dashboard Output Container -->
-        <div id="dashboard-container" class="hidden">
-            <!-- Demo Mode Warning Banner -->
-            <div id="demo-banner" class="hidden mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 flex items-start gap-3 backdrop-blur-md">
-                <i class="fa-solid fa-triangle-exclamation text-lg mt-0.5"></i>
-                <div>
-                    <h4 class="font-bold">Amazon Bot Protection Triggered</h4>
-                    <p class="text-sm text-amber-400/90 mt-0.5">
-                        Direct connection was rate-limited or blocked by Amazon. We've loaded a set of high-fidelity pre-scraped reviews for this category to demonstrate the AI detection.
-                    </p>
+        <!-- Error State Container -->
+        <div id="error-container" class="hidden my-8 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 max-w-xl mx-auto flex items-start gap-3">
+            <i class="fa-solid fa-circle-exclamation text-rose-400 text-lg mt-0.5"></i>
+            <div class="flex-1">
+                <h4 class="text-sm font-bold text-rose-200">Execution Error</h4>
+                <p id="error-text" class="text-xs text-rose-300/90 mt-0.5 leading-relaxed font-mono"></p>
+            </div>
+            <button onclick="document.getElementById('error-container').classList.add('hidden')" class="text-rose-400 hover:text-rose-200 p-1">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Telemetry & Results Dashboard -->
+        <main id="dashboard-container" class="hidden animate-fade-in space-y-8">
+            
+            <!-- Fallback Bot Notice (if Anti-Bot / No reviews encountered) -->
+            <div id="demo-banner" class="hidden p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 flex items-start gap-3">
+                <i class="fa-solid fa-shield-virus text-amber-400 text-base mt-0.5"></i>
+                <div class="text-xs">
+                    <span id="demo-banner-title" class="font-bold text-amber-300">Notice:</span>
+                    <span id="demo-banner-text" class="text-amber-200/90 ml-1">Direct connection was restricted or store has 0 written reviews. Loaded benchmark data.</span>
                 </div>
             </div>
 
-            <!-- Stats Overview Row -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <!-- Trust Gauge Card -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 flex items-center justify-between">
-                    <div>
-                        <h3 class="text-sm text-slate-400 font-medium uppercase tracking-wider">Product Trust Score</h3>
-                        <div class="text-4xl font-extrabold text-white mt-1" id="stat-trust-score">--%</div>
-                        <p class="text-xs text-slate-400 mt-2" id="stat-trust-desc">Percentage of verified genuine reviews.</p>
+            <!-- Top Telemetry Metrics Row -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                
+                <!-- Integrity Index (Gauge) -->
+                <div class="surface-card p-5 rounded-xl border border-border-muted flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Trust Index</span>
+                        <span id="stat-risk-badge" class="text-[10px] font-mono px-2 py-0.5 rounded font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">LOW RISK</span>
                     </div>
-                    <div class="relative w-24 h-24 flex items-center justify-center">
-                        <!-- SVG Circle Ring -->
-                        <svg class="w-full h-full transform -rotate-90">
-                            <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent"/>
-                            <circle id="trust-gauge-circle" cx="48" cy="48" r="40" stroke="url(#emeraldGradient)" stroke-width="8" fill="transparent"
-                                    stroke-dasharray="251.2" stroke-dashoffset="251.2" class="transition-all duration-1000 ease-out"/>
-                            <defs>
-                                <linearGradient id="emeraldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#34d399" />
-                                    <stop offset="100%" stop-color="#059669" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <span class="absolute text-lg font-bold text-slate-200" id="stat-trust-gauge-text">--%</span>
+                    <div class="flex items-baseline gap-2 my-2">
+                        <span class="text-4xl font-extrabold font-mono text-white tracking-tight" id="stat-trust-score">--%</span>
+                        <span class="text-xs text-slate-500 font-mono">authentic</span>
                     </div>
+                    <p class="text-xs text-slate-400 font-sans" id="stat-trust-desc">Ratio of genuine organic reviews.</p>
                 </div>
 
-                <!-- Verified Genuine Count -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-sm text-slate-400 font-medium uppercase tracking-wider">Verified Genuine</h3>
-                            <div class="text-4xl font-extrabold text-emerald-400 mt-1" id="stat-real-count">0</div>
+                <!-- Verified Organic Count -->
+                <div class="surface-card p-5 rounded-xl border border-border-muted flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Organic (OR)</span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    </div>
+                    <div class="my-2">
+                        <div class="text-3xl font-bold font-mono text-emerald-400" id="stat-real-count">0</div>
+                        <div class="w-full bg-surface-50 rounded-full h-1 mt-2">
+                            <div id="bar-real-percent" class="bg-emerald-500 h-1 rounded-full transition-all duration-700" style="width: 0%"></div>
                         </div>
-                        <span class="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/25">
-                            <i class="fa-solid fa-circle-check text-xl"></i>
-                        </span>
                     </div>
-                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-4">
-                        <div id="bar-real-percent" class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-1.5 rounded-full transition-all duration-1000" style="width: 0%"></div>
-                    </div>
+                    <span class="text-[11px] font-mono text-slate-500" id="stat-real-percent-text">0% of total sample</span>
                 </div>
 
-                <!-- Suspicious / AI-Generated Count -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-sm text-slate-400 font-medium uppercase tracking-wider">Suspicious / Fake</h3>
-                            <div class="text-4xl font-extrabold text-rose-500 mt-1" id="stat-fake-count">0</div>
+                <!-- Flagged Synthetic Count -->
+                <div class="surface-card p-5 rounded-xl border border-border-muted flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Synthetic (CG)</span>
+                        <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                    </div>
+                    <div class="my-2">
+                        <div class="text-3xl font-bold font-mono text-rose-400" id="stat-fake-count">0</div>
+                        <div class="w-full bg-surface-50 rounded-full h-1 mt-2">
+                            <div id="bar-fake-percent" class="bg-rose-500 h-1 rounded-full transition-all duration-700" style="width: 0%"></div>
                         </div>
-                        <span class="p-2 bg-rose-500/10 rounded-lg text-rose-400 border border-rose-500/25">
-                            <i class="fa-solid fa-triangle-exclamation text-xl"></i>
-                        </span>
                     </div>
-                    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-4">
-                        <div id="bar-fake-percent" class="bg-gradient-to-r from-rose-400 to-rose-600 h-1.5 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                    <span class="text-[11px] font-mono text-slate-500" id="stat-fake-percent-text">0% flagged anomalous</span>
+                </div>
+
+                <!-- Corpus Statistics -->
+                <div class="surface-card p-5 rounded-xl border border-border-muted flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Pipeline Meta</span>
+                        <i class="fa-solid fa-microchip text-slate-500 text-xs"></i>
                     </div>
+                    <div class="space-y-1.5 my-1 text-xs font-mono">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Sample Size:</span>
+                            <span class="text-slate-300 font-semibold" id="meta-sample-count">--</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Vector Space:</span>
+                            <span class="text-slate-300 font-semibold">102 Dim</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Avg Confidence:</span>
+                            <span class="text-slate-300 font-semibold" id="meta-avg-conf">--%</span>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-500">Kernel: Linear Hyperplane</span>
                 </div>
             </div>
 
-            <!-- Review Cards Output Header -->
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-slate-100 flex items-center gap-2">
-                    <i class="fa-solid fa-list-check text-indigo-400"></i> Detailed Review Audit
-                </h3>
-                <span class="text-sm text-slate-400 font-medium" id="stat-total-reviews">Showing -- reviews</span>
-            </div>
+            <!-- Review Explorer & Filtering Controls -->
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-border-subtle">
+                    
+                    <!-- Filter Tabs -->
+                    <div class="flex items-center gap-1 p-1 rounded-lg bg-surface-200 border border-border-subtle text-xs font-medium">
+                        <button onclick="filterReviews('all')" id="tab-all" class="tab-btn active">
+                            All Reviews (<span id="tab-count-all">0</span>)
+                        </button>
+                        <button onclick="filterReviews('real')" id="tab-real" class="tab-btn">
+                            Organic (<span id="tab-count-real">0</span>)
+                        </button>
+                        <button onclick="filterReviews('fake')" id="tab-fake" class="tab-btn">
+                            Synthetic (<span id="tab-count-fake">0</span>)
+                        </button>
+                    </div>
 
-            <!-- Results container -->
-            <div id="result" class="space-y-4">
-                <!-- Javascript will inject review cards here -->
-            </div>
-        </div>
-        
-        <!-- Error Area -->
-        <div id="error-container" class="hidden mt-8 max-w-md mx-auto p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-center flex flex-col items-center gap-2 backdrop-blur-md">
-            <i class="fa-solid fa-circle-xmark text-3xl"></i>
-            <h4 class="font-bold text-slate-200">Analysis Failed</h4>
-            <p id="error-text" class="text-sm text-rose-400/90"></p>
-        </div>
-        
-    </main>
+                    <!-- Search within Results & Export -->
+                    <div class="flex items-center gap-2">
+                        <div class="relative flex-1 sm:w-64">
+                            <i class="fa-solid fa-magnifying-glass text-[11px] text-slate-500 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                            <input type="text" id="filter-search" oninput="searchReviews(this.value)"
+                                   placeholder="Filter keywords..."
+                                   class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-surface-200 border border-border-subtle text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-border-active font-sans">
+                        </div>
+                        <button onclick="exportJSON()" class="p-2 rounded-lg bg-surface-200 hover:bg-surface-100 border border-border-subtle text-slate-400 hover:text-white text-xs transition-colors" title="Copy JSON Payload">
+                            <i class="fa-solid fa-code"></i>
+                        </button>
+                        <button onclick="exportCSV()" class="p-2 rounded-lg bg-surface-200 hover:bg-surface-100 border border-border-subtle text-slate-400 hover:text-white text-xs transition-colors" title="Download CSV">
+                            <i class="fa-solid fa-download"></i>
+                        </button>
+                    </div>
+                </div>
 
-    <!-- Footer -->
-    <footer class="mt-16 mb-4 text-center text-slate-600 text-xs z-10 w-full">
-        <p>&copy; 2026 Fake Review Detector. Empowered by Word2Vec & SVM Classifier.</p>
-    </footer>
+                <!-- Review Feed Container -->
+                <div id="result" class="space-y-3">
+                    <!-- Cards will be populated by script.js -->
+                </div>
+
+                <!-- Empty State for Filters -->
+                <div id="filter-empty" class="hidden py-12 text-center text-slate-500 text-xs font-mono">
+                    No reviews match the current filtering parameters.
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono gap-3">
+            <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                <span>SENTINEL REVIEW INTEGRITY SYSTEM</span>
+            </div>
+            <p>Word2Vec Embedding + Scikit-Learn SVM • Built with Python & Flask</p>
+        </footer>
+    </div>
 </body>
 </html>
+

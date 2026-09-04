@@ -22,7 +22,8 @@ textblob==0.18.0
 emoji==2.12.1
 langdetect==1.0.9
 
-# Web Scraping
+# Web Scraping & TLS Impersonation
 requests==2.32.3
 beautifulsoup4==4.12.3
 lxml==5.2.2
+curl_cffi>=0.7.0

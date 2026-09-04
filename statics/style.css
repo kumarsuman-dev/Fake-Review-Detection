@@ -1,134 +1,207 @@
-/* Custom Styles & Glassmorphism Properties */
+/* ==========================================================================
+   SENTINEL — Engineering-Grade CSS System (Top 1% UI/UX Mindset)
+   Obsidian Canvas · Crisp Micro-Contrast · JetBrains Mono Telemetry
+   ========================================================================== */
 
 :root {
-    --glass-bg: rgba(15, 23, 42, 0.45);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    --bg-canvas: #090a0f;
+    --surface-base: #121622;
+    --surface-elevated: #181d2a;
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-muted: rgba(255, 255, 255, 0.12);
+    --border-active: rgba(255, 255, 255, 0.25);
+    
+    /* Semantic Status Accents */
+    --color-emerald: #10b981;
+    --color-rose: #f43f5e;
+    --color-amber: #f59e0b;
 }
 
 body {
+    background-color: var(--bg-canvas);
+    color: #f1f5f9;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Subtle Technical Grid Overlay */
+.bg-grid-pattern {
+    background-size: 28px 28px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+    -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+}
+
+/* Subtle Vignette Spotlight at Top */
+.bg-radial-glow {
+    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.035) 0%, transparent 70%);
+}
+
+/* Precision Surface Card with Top Inner Highlight */
+.surface-card {
+    background-color: var(--surface-base);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.surface-card:hover {
+    border-color: var(--border-muted);
+}
+
+/* Platform Compatibility Pills */
+.platform-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    color: #94a3b8;
+    font-size: 0.6875rem;
+}
+
+/* Preset Quick-Click Buttons */
+.preset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 0.5rem;
+    background-color: #0d101a;
+    border: 1px solid var(--border-subtle);
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+    background-color: var(--surface-elevated);
+    border-color: var(--border-muted);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Tab Filter Buttons */
+.tab-btn {
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.375rem;
+    color: #94a3b8;
+    transition: all 0.15s ease;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tab-btn:hover {
+    color: #f1f5f9;
+}
+
+.tab-btn.active {
+    background-color: var(--surface-base);
+    color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Review Cards - Surgical Engineering Style */
+.review-card {
+    background-color: var(--surface-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    transition: all 0.2s ease;
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
-/* Background Glow Effects */
-.glow-bg {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(130px);
-    opacity: 0.15;
-    z-index: 1;
-    pointer-events: none;
+.review-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
 }
 
-.glow-purple {
-    top: 10%;
-    left: 15%;
-    width: 350px;
-    height: 350px;
-    background: #6366f1;
+.review-card.card-real::before {
+    background-color: var(--color-emerald);
 }
 
-.glow-blue {
-    bottom: 15%;
-    right: 15%;
-    width: 400px;
-    height: 400px;
-    background: #0ea5e9;
+.review-card.card-fake::before {
+    background-color: var(--color-rose);
 }
 
-/* Glassmorphism Panel */
-.glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
+.review-card:hover {
+    border-color: var(--border-muted);
+    box-shadow: 0 6px 24px -4px rgba(0, 0, 0, 0.6);
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInCard {
-    from { opacity: 0; transform: translateX(-15px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-slide-up {
-    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.review-card-anim {
-    animation: slideInCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-fill-mode: both;
-}
-
-/* Custom Interactive States */
-.demo-card:hover {
-    box-shadow: 0 4px 20px 0 rgba(99, 102, 241, 0.15);
-}
-
-/* Review Badge */
+/* Prediction Badges */
 .badge-real {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(16, 185, 129, 0.08);
     color: #34d399;
     border: 1px solid rgba(16, 185, 129, 0.25);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
 }
 
 .badge-fake {
-    background: rgba(244, 63, 94, 0.1);
+    background: rgba(244, 63, 94, 0.08);
     color: #fb7185;
     border: 1px solid rgba(244, 63, 94, 0.25);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
 }
 
-/* Accordion Smooth Transition */
+/* Smooth Technical Accordion */
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
     opacity: 0;
 }
 
 .accordion-active .accordion-content {
-    max-height: 250px;
+    max-height: 200px;
     opacity: 1;
 }
 
 .accordion-btn i {
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .accordion-active .accordion-btn i {
     transform: rotate(180deg);
 }
 
-/* Styling custom scrollbars for reviews */
+/* Animation utilities */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scrollbars */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.3);
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.25);
-}
+}
