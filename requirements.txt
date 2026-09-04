@@ -1,28 +1,12 @@
-# ─────────────────────────────────────────────
-# Fake Review Detection — Clean requirements.txt
-# Works on Render, Railway, and any clean Python env
-# ─────────────────────────────────────────────
-
 # Web Framework
 Flask==3.1.0
 Werkzeug==3.1.3
-gunicorn==23.0.0
 
-# Data & ML
+# Core Math & NLP
 numpy==1.26.4
-pandas==2.2.2
-scikit-learn==1.7.1
-scipy==1.13.1
-joblib==1.4.2
-
-# NLP
 nltk==3.9.1
-gensim==4.3.3
-textblob==0.18.0
 emoji==2.12.1
-langdetect==1.0.9
 
 # Web Scraping
 requests==2.32.3
 beautifulsoup4==4.12.3
-lxml==5.2.2

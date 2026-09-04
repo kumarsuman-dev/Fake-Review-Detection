@@ -1,4 +1,4 @@
-# 🕵️ Fake Review Detection — Complete Interview Preparation Guide
+#  Fake Review Detection — Complete Interview Preparation Guide
 
 > **Prepared by:** Antigravity AI  
 > **Project Author:** Suman Kumar  
@@ -7,7 +7,7 @@
 
 ---
 
-# 📌 TABLE OF CONTENTS
+#  TABLE OF CONTENTS
 
 1. [Project Overview](#1-project-overview)
 2. [Features](#2-features)
@@ -41,7 +41,7 @@
 
 # 1. PROJECT OVERVIEW
 
-## 🔸 Problem Statement
+##  Problem Statement
 
 **Simple English:** When you shop online on Amazon, you cannot always trust the star ratings and reviews. Sellers pay for fake positive reviews written by bots or paid humans. This misleads genuine buyers into purchasing low-quality products.
 
@@ -49,7 +49,7 @@
 
 ---
 
-## 🔸 Why This Project Was Built
+##  Why This Project Was Built
 
 - Online review manipulation is a **$152 billion dollar fraud** problem (as per market research).
 - Platforms like Amazon struggle to fully prevent review manipulation at scale.
@@ -58,7 +58,7 @@
 
 ---
 
-## 🔸 Real-World Use Cases
+##  Real-World Use Cases
 
 | Use Case | Description |
 |---|---|
@@ -70,7 +70,7 @@
 
 ---
 
-## 🔸 Target Users
+##  Target Users
 
 1. **Consumers** — Everyday shoppers who want trusted product insights
 2. **E-commerce Operators** — Marketplace teams running review quality pipelines
@@ -79,7 +79,7 @@
 
 ---
 
-## 🔸 Business Value
+##  Business Value
 
 - Reduces consumer deception → increases brand trust
 - Demonstrates NLP + ML expertise suitable for roles in fintech, e-commerce, content moderation, and fraud detection
@@ -91,7 +91,7 @@
 
 # 2. FEATURES
 
-## 🔸 Feature 1: Amazon URL-Based Review Scraping
+##  Feature 1: Amazon URL-Based Review Scraping
 
 **What it does:** Takes a user-provided Amazon product URL, sends an HTTP GET request with browser-like headers, parses the HTML response using BeautifulSoup, and extracts review text and star ratings.
 
@@ -110,7 +110,7 @@
 
 ---
 
-## 🔸 Feature 2: Demo Mode with Pre-scraped Mock Reviews
+##  Feature 2: Demo Mode with Pre-scraped Mock Reviews
 
 **What it does:** When Amazon's bot-protection blocks scraping, the app does NOT show an error. Instead it loads hand-crafted demo reviews for 4 categories: headphones, kindle, chair, and generic products.
 
@@ -120,7 +120,7 @@
 
 ---
 
-## 🔸 Feature 3: NLP Text Preprocessing Pipeline
+##  Feature 3: NLP Text Preprocessing Pipeline
 
 **What it does:** Transforms raw messy text into a clean, normalized, machine-learnable format through 8 steps:
 1. Lowercase + strip whitespace
@@ -136,7 +136,7 @@
 
 ---
 
-## 🔸 Feature 4: Word2Vec Text Embedding
+##  Feature 4: Word2Vec Text Embedding
 
 **What it does:** Converts preprocessed review text into a 100-dimensional numerical vector by averaging the Word2Vec embeddings of all words in the review.
 
@@ -144,7 +144,7 @@
 
 ---
 
-## 🔸 Feature 5: SVM Classification
+##  Feature 5: SVM Classification
 
 **What it does:** Takes a 102-dimensional combined feature vector (rating[1] + word_length[1] + word2vec_embedding[100]) and predicts 0 (Real) or 1 (Fake).
 
@@ -152,7 +152,7 @@
 
 ---
 
-## 🔸 Feature 6: Confidence Score Calculation
+##  Feature 6: Confidence Score Calculation
 
 **What it does:** Uses `svm_model.decision_function()` to get a raw distance from the hyperplane, then passes it through a sigmoid function to get a probability-like confidence percentage.
 
@@ -160,7 +160,7 @@
 
 ---
 
-## 🔸 Feature 7: Statistical Dashboard
+##  Feature 7: Statistical Dashboard
 
 **What it does:** Renders a visual dashboard after analysis showing:
 - **Product Trust Score**: % of real reviews (animated SVG circle gauge)
@@ -170,7 +170,7 @@
 
 ---
 
-## 🔸 Feature 8: Per-Review Linguistic Details (Accordion)
+##  Feature 8: Per-Review Linguistic Details (Accordion)
 
 **What it does:** Each review card has a toggle button revealing:
 - Model Confidence %
@@ -182,7 +182,7 @@
 
 ---
 
-## 🔸 Feature 9: Quick Demo Products
+##  Feature 9: Quick Demo Products
 
 **What it does:** 4 preset product buttons (Sony XM4, Kindle Paperwhite, Ergonomic Chair, Generic) auto-fill the URL input and trigger analysis with a single click.
 
@@ -194,7 +194,7 @@
 
 # 3. SYSTEM ARCHITECTURE
 
-## 🔸 Overall Architecture Diagram
+##  Overall Architecture Diagram
 
 ```mermaid
 graph TB
@@ -218,7 +218,7 @@ graph TB
 
 ---
 
-## 🔸 Frontend Architecture
+##  Frontend Architecture
 
 ```
 Browser
@@ -240,7 +240,7 @@ Browser
 
 ---
 
-## 🔸 Backend Architecture
+##  Backend Architecture
 
 ```
 Flask Application (app.py)
@@ -272,7 +272,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 Request–Response Lifecycle
+##  Request–Response Lifecycle
 
 ```
 1. Browser: User clicks "Run Detection"
@@ -301,7 +301,7 @@ Flask Application (app.py)
 
 # 4. TECHNOLOGY STACK
 
-## 🔸 Backend Framework — Flask
+##  Backend Framework — Flask
 
 | Aspect | Details |
 |---|---|
@@ -313,7 +313,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 ML Model — Support Vector Machine (SVM)
+##  ML Model — Support Vector Machine (SVM)
 
 | Aspect | Details |
 |---|---|
@@ -327,7 +327,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 NLP Embedding — Word2Vec (Gensim)
+##  NLP Embedding — Word2Vec (Gensim)
 
 | Aspect | Details |
 |---|---|
@@ -341,17 +341,17 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 Text Processing — NLTK
+##  Text Processing — NLTK
 
 | Aspect | Details |
 |---|---|
 | **Why NLTK?** | Industry-standard NLP toolkit. Has tokenizer, stopword lists, lemmatizer, stemmer |
 | **Components Used** | `word_tokenize`, `stopwords`, `WordNetLemmatizer`, `PorterStemmer` |
-| **Why Lemmatize AND Stem?** | Code lemmatizes first, then re-joins with stems — ⚠️ *this is a bug* (see Section 24) |
+| **Why Lemmatize AND Stem?** | Code lemmatizes first, then re-joins with stems —  *this is a bug* (see Section 24) |
 
 ---
 
-## 🔸 Web Scraping — requests + BeautifulSoup
+##  Web Scraping — requests + BeautifulSoup
 
 | Aspect | Details |
 |---|---|
@@ -362,7 +362,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 Language Detection — langdetect
+##  Language Detection — langdetect
 
 | Aspect | Details |
 |---|---|
@@ -371,7 +371,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 Frontend — HTML + Tailwind CSS + Vanilla JS
+##  Frontend — HTML + Tailwind CSS + Vanilla JS
 
 | Aspect | Details |
 |---|---|
@@ -382,7 +382,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 Model Serialization — joblib
+##  Model Serialization — joblib
 
 | Aspect | Details |
 |---|---|
@@ -391,7 +391,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 Data Handling — pandas
+##  Data Handling — pandas
 
 | Aspect | Details |
 |---|---|
@@ -399,7 +399,7 @@ Flask Application (app.py)
 
 ---
 
-## 🔸 Production Server — gunicorn
+##  Production Server — gunicorn
 
 | Aspect | Details |
 |---|---|
@@ -458,9 +458,9 @@ This is a deliberate naming choice — it doesn't affect functionality but you m
 
 # 6. DATABASE DESIGN
 
-> ⚠️ **[ASSUMPTION]** This project uses **no persistent database** (no PostgreSQL, MongoDB, or SQLite). Data flows are in-memory (Python objects, pandas DataFrames) for the duration of each request.
+>  **[ASSUMPTION]** This project uses **no persistent database** (no PostgreSQL, MongoDB, or SQLite). Data flows are in-memory (Python objects, pandas DataFrames) for the duration of each request.
 
-## 🔸 Data Structures (In-Memory "Schema")
+##  Data Structures (In-Memory "Schema")
 
 ### Training Dataset — `row_data.csv`
 
@@ -506,7 +506,7 @@ After loading in `model.py`, label is mapped to integers: `{'CG': 1, 'OR': 0}`
 }
 ```
 
-## 🔸 ER Diagram (Conceptual)
+##  ER Diagram (Conceptual)
 
 ```
 [raw_review_dataset]
@@ -545,7 +545,7 @@ After loading in `model.py`, label is mapped to integers: `{'CG': 1, 'OR': 0}`
 
 # 7. BACKEND
 
-## 🔸 Routes
+##  Routes
 
 ### `GET /`
 - **Controller:** `index()` in `app.py`
@@ -562,7 +562,7 @@ After loading in `model.py`, label is mapped to integers: `{'CG': 1, 'OR': 0}`
 
 ---
 
-## 🔸 Controllers (Functions)
+##  Controllers (Functions)
 
 ### `index()` — app.py line 134–136
 ```python
@@ -585,7 +585,7 @@ The main orchestration function. Acts as a controller that calls service functio
 
 ---
 
-## 🔸 Services
+##  Services
 
 ### `scrape_reviews()` — scraper.py
 - **Input:** URL string
@@ -615,7 +615,7 @@ The main orchestration function. Acts as a controller that calls service functio
 
 ---
 
-## 🔸 Middleware
+##  Middleware
 
 Flask has no explicit middleware in this project. However, there are implicit patterns:
 - **CORS:** Not configured (same-origin requests only)
@@ -624,14 +624,14 @@ Flask has no explicit middleware in this project. However, there are implicit pa
 
 ---
 
-## 🔸 Authentication & Authorization
+##  Authentication & Authorization
 
-> ⚠️ **[NOT IMPLEMENTED]** This is an open, public tool with no user accounts. No JWT, no sessions, no login required.
+>  **[NOT IMPLEMENTED]** This is an open, public tool with no user accounts. No JWT, no sessions, no login required.
 > This would be a significant future improvement — see Section 19.
 
 ---
 
-## 🔸 Input Validation
+##  Input Validation
 
 | Check | Location | Response |
 |---|---|---|
@@ -643,7 +643,7 @@ Flask has no explicit middleware in this project. However, there are implicit pa
 
 ---
 
-## 🔸 Error Handling
+##  Error Handling
 
 ```python
 # HTTP 400 - Bad Request
@@ -662,7 +662,7 @@ No global exception handler. If `classify_reviews()` raises an unexpected except
 
 ---
 
-## 🔸 Logging
+##  Logging
 
 Only `print()` statements in `scraper.py`:
 ```python
@@ -678,7 +678,7 @@ No structured logging (Python `logging` module not used). This is a production g
 
 # 8. FRONTEND
 
-## 🔸 Components (Vanilla HTML sections)
+##  Components (Vanilla HTML sections)
 
 | Component | HTML Element | Purpose |
 |---|---|---|
@@ -696,7 +696,7 @@ No structured logging (Python `logging` module not used). This is a production g
 
 ---
 
-## 🔸 State Management
+##  State Management
 
 No state library used. All state is managed via:
 1. **CSS classes** (`hidden` / `visible`) — show/hide sections
@@ -713,7 +713,7 @@ Error State: loading=hidden, error=visible
 
 ---
 
-## 🔸 API Integration (Fetch API)
+##  API Integration (Fetch API)
 
 ```javascript
 fetch("/analyze", {
@@ -732,16 +732,16 @@ fetch("/analyze", {
 
 ---
 
-## 🔸 Forms & Validation
+##  Forms & Validation
 
 | Validation | Location | Mechanism |
 |---|---|---|
 | Empty URL check | `analyzeReviews()` → line 13 | `if (!url)` → `showError()` |
-| Valid URL format | ⚠️ NOT implemented | No regex check — any string is sent |
+| Valid URL format |  NOT implemented | No regex check — any string is sent |
 
 ---
 
-## 🔸 UI Design Principles
+##  UI Design Principles
 
 1. **Glassmorphism** — `backdrop-filter: blur(16px)` + semi-transparent backgrounds
 2. **Dark Mode** — `slate-950` to `indigo-950` gradient background
@@ -753,7 +753,7 @@ fetch("/analyze", {
 
 ---
 
-## 🔸 Responsive Design
+##  Responsive Design
 
 Tailwind breakpoint prefixes used:
 - `md:` prefix for medium screens (≥768px)
@@ -855,7 +855,7 @@ Tailwind breakpoint prefixes used:
 
 # 10. AUTHENTICATION FLOW
 
-> ⚠️ **[NOT IMPLEMENTED IN CURRENT VERSION]**
+>  **[NOT IMPLEMENTED IN CURRENT VERSION]**
 
 The current version is a **public, stateless API** with no authentication. This is a legitimate architectural decision for a demonstration tool.
 
@@ -998,7 +998,7 @@ STEP 9: User clicks trash icon (clearResults())
    CSS Selector → [data-hook="review"] blocks
    Text Selector → [data-hook="review-body"]
    Rating Selector → [data-hook="review-star-rating"]
-   langdetect("The sound quality is...") → 'en' ✓
+   langdetect("The sound quality is...") → 'en' 
    Return: pd.DataFrame([
      {"Rating": "5.0", "Review Text": "The sound quality is outstanding..."},
      ...
@@ -1060,7 +1060,7 @@ STEP 9: User clicks trash icon (clearResults())
    circle.style.strokeDashoffset = 62.8  → animates to 75% filled
    
    For each review → inject HTML card into #result div
-   Review card shows: ⭐⭐⭐⭐⭐ | ✅ Real (Original) | "The sound quality is..."
+   Review card shows: ⭐⭐⭐⭐⭐ |  Real (Original) | "The sound quality is..."
 ```
 
 ---
@@ -1069,7 +1069,7 @@ STEP 9: User clicks trash icon (clearResults())
 
 # 13. IMPORTANT ALGORITHMS
 
-## 🔸 Algorithm 1: Word2Vec — Skip-Gram / CBOW
+##  Algorithm 1: Word2Vec — Skip-Gram / CBOW
 
 **Simple English:** Word2Vec turns words into numbers. Words with similar meanings get similar numbers. The model is trained by predicting surrounding words given a target word.
 
@@ -1092,7 +1092,7 @@ text_vector = np.mean(vectors, axis=0)  # → single 100-dim vector
 
 ---
 
-## 🔸 Algorithm 2: Support Vector Machine (SVM)
+##  Algorithm 2: Support Vector Machine (SVM)
 
 **Simple English:** SVM draws the best possible boundary (hyperplane) between "Real" and "Fake" review examples. New reviews are classified based on which side of the boundary they fall on.
 
@@ -1117,7 +1117,7 @@ decision_val = svm_model.decision_function(combined_features)[0]
 
 ---
 
-## 🔸 Algorithm 3: Sigmoid Confidence Conversion
+##  Algorithm 3: Sigmoid Confidence Conversion
 
 **Simple English:** SVM gives a raw score. The sigmoid function converts any number into a value between 0 and 1 (probability-like).
 
@@ -1134,7 +1134,7 @@ prob = 1.0 / (1.0 + np.exp(-decision_val))  # Sigmoid function
 
 ---
 
-## 🔸 Algorithm 4: NLP Preprocessing Pipeline
+##  Algorithm 4: NLP Preprocessing Pipeline
 
 **Time Complexity:** O(n × m) where n = number of reviews, m = average tokens per review
 **Space Complexity:** O(m) per review (no batch caching)
@@ -1147,7 +1147,7 @@ Key sub-algorithms:
 
 ---
 
-## 🔸 Algorithm 5: Trust Score Calculation
+##  Algorithm 5: Trust Score Calculation
 
 ```javascript
 const trustScore = Math.round((realCount / totalCount) * 100);
@@ -1166,7 +1166,7 @@ circle.style.strokeDashoffset = offset;
 
 ---
 
-## 🔸 Algorithm 6: Language Detection
+##  Algorithm 6: Language Detection
 
 `langdetect` library uses a Naive Bayes classifier trained on character n-gram profiles of 55 languages. For each review text, it returns the most probable language code.
 
@@ -1175,7 +1175,7 @@ circle.style.strokeDashoffset = offset;
 
 ---
 
-## 🔸 Algorithm 7: Feature Combination (hstack)
+##  Algorithm 7: Feature Combination (hstack)
 
 ```python
 combined_features = np.hstack([rating_vector, length_vector, text_vector])
@@ -1232,11 +1232,11 @@ The fetch Promise `.then()` chain is essentially observer-like — the UI "obser
 
 # 15. SECURITY
 
-## 🔸 SQL Injection Prevention
-✅ **Not applicable** — no SQL database is used. Data is processed entirely in-memory with pandas DataFrames.
+##  SQL Injection Prevention
+ **Not applicable** — no SQL database is used. Data is processed entirely in-memory with pandas DataFrames.
 
-## 🔸 XSS (Cross-Site Scripting) Prevention
-⚠️ **Partial vulnerability:**
+##  XSS (Cross-Site Scripting) Prevention
+ **Partial vulnerability:**
 
 ```javascript
 // VULNERABLE — review card HTML injection (script.js)
@@ -1254,17 +1254,17 @@ function escapeHTML(str) {
 
 Flask's Jinja2 templates auto-escape by default (`{{ variable }}` is safe). Since review content is injected via JS `innerHTML`, it bypasses Jinja2's protection.
 
-## 🔸 CSRF (Cross-Site Request Forgery)
-⚠️ **Not implemented.** The `/analyze` endpoint accepts any POST request. A CSRF token should be embedded in the form and verified server-side. `Flask-WTF` provides CSRF protection automatically.
+##  CSRF (Cross-Site Request Forgery)
+ **Not implemented.** The `/analyze` endpoint accepts any POST request. A CSRF token should be embedded in the form and verified server-side. `Flask-WTF` provides CSRF protection automatically.
 
-## 🔸 Authentication & Authorization
-⚠️ **Not implemented.** Public endpoint. See Section 10 for what should be added.
+##  Authentication & Authorization
+ **Not implemented.** Public endpoint. See Section 10 for what should be added.
 
-## 🔸 Password Encryption
-✅ **N/A** — no user accounts.
+##  Password Encryption
+ **N/A** — no user accounts.
 
-## 🔸 Rate Limiting
-⚠️ **Not implemented.** Without rate limiting, an attacker could spam `/analyze` with thousands of requests per second, triggering massive Amazon scraping and exhausting server resources. Solution: Use `Flask-Limiter`.
+##  Rate Limiting
+ **Not implemented.** Without rate limiting, an attacker could spam `/analyze` with thousands of requests per second, triggering massive Amazon scraping and exhausting server resources. Solution: Use `Flask-Limiter`.
 ```python
 from flask_limiter import Limiter
 limiter = Limiter(app, default_limits=["20 per minute"])
@@ -1273,28 +1273,28 @@ limiter = Limiter(app, default_limits=["20 per minute"])
 def analyze(): ...
 ```
 
-## 🔸 CORS (Cross-Origin Resource Sharing)
-⚠️ **Not configured.** Flask does not add CORS headers by default. Requests from a different domain would fail in browsers. For production, add `Flask-CORS`:
+##  CORS (Cross-Origin Resource Sharing)
+ **Not configured.** Flask does not add CORS headers by default. Requests from a different domain would fail in browsers. For production, add `Flask-CORS`:
 ```python
 from flask_cors import CORS
 CORS(app, resources={r"/analyze": {"origins": "https://yourdomain.com"}})
 ```
 
-## 🔸 Input Validation
-✅ **Basic validation only:**
+##  Input Validation
+ **Basic validation only:**
 - Empty URL check (both JS and backend)
 - Missing DataFrame columns check
 - Rating value type check with fallback
 
-❌ **Missing:**
+ **Missing:**
 - URL format validation (is it actually a URL?)
 - URL allowlist (only Amazon URLs allowed?)
 - Request body size limit
 
-## 🔸 Scraper Security
+##  Scraper Security
 The scraper impersonates a browser with fake User-Agent headers. Amazon's Terms of Service technically prohibit scraping. For production deployment, use the **Product Advertising API** (Amazon's official data access method).
 
-## 🔸 Model File Security
+##  Model File Security
 `SVM_model.pkl` is a joblib-serialized file. Loading untrusted pickle files can execute arbitrary code. Since the model is generated internally and stored locally, risk is low. Never accept model uploads from users.
 
 ---
@@ -1303,7 +1303,7 @@ The scraper impersonates a browser with fake User-Agent headers. Amazon's Terms 
 
 # 16. PERFORMANCE OPTIMISATION
 
-## 🔸 Model Loading (Critical)
+##  Model Loading (Critical)
 
 ```python
 # app.py — module-level (runs ONCE at startup)
@@ -1312,7 +1312,7 @@ word2vec_model, svm_model = load_models()
 
 Loading Word2Vec (21.7 MB) + SVM (13.6 MB) at startup is the most critical optimisation. Without this, every request would reload models from disk — adding 3–5 seconds per request.
 
-## 🔸 Lazy Loading (Frontend)
+##  Lazy Loading (Frontend)
 
 ```html
 <script src="script.js" defer></script>
@@ -1320,7 +1320,7 @@ Loading Word2Vec (21.7 MB) + SVM (13.6 MB) at startup is the most critical optim
 
 `defer` attribute ensures script.js loads AFTER HTML parsing completes. The browser doesn't block on JS loading, making the page appear faster.
 
-## 🔸 Caching (Current: None)
+##  Caching (Current: None)
 
 No response caching is implemented. Improvement: Cache results keyed by URL using Redis or Flask-Caching:
 ```python
@@ -1332,7 +1332,7 @@ def scrape_reviews(url): ...
 ```
 Same URL won't be re-scraped within 5 minutes.
 
-## 🔸 Parallel Processing (Training Phase Only)
+##  Parallel Processing (Training Phase Only)
 
 ```python
 Word2Vec(sentences, workers=4)  # Uses 4 CPU cores for training
@@ -1340,21 +1340,21 @@ Word2Vec(sentences, workers=4)  # Uses 4 CPU cores for training
 
 Only used during training. Inference is single-threaded.
 
-## 🔸 Graceful Degradation (Performance Safety)
+##  Graceful Degradation (Performance Safety)
 
 Mock reviews prevent slow Amazon requests from making the app appear broken. If Amazon times out (10s timeout configured), mock data loads instantly.
 
-## 🔸 Animation Performance (Frontend)
+##  Animation Performance (Frontend)
 
 CSS animations use `transform` and `opacity` — these are GPU-composited properties that don't trigger layout reflow. This ensures smooth 60fps animations.
 
-## 🔸 Database Indexing
+##  Database Indexing
 N/A — no database used. If a database were added, indexing on `url` for caching would be priority #1.
 
-## 🔸 Compression
+##  Compression
 Flask does not enable gzip compression by default. In production with gunicorn behind nginx, nginx handles gzip compression of API responses, reducing bandwidth.
 
-## 🔸 Pagination
+##  Pagination
 No pagination implemented for review results. If 100+ reviews are returned, all cards are rendered at once. Virtual scrolling or server-side pagination (return first 20, load more on scroll) would improve performance for large datasets.
 
 ---
@@ -1363,7 +1363,7 @@ No pagination implemented for review results. If 100+ reviews are returned, all 
 
 # 17. DEPLOYMENT
 
-## 🔸 Supported Hosting Platforms
+##  Supported Hosting Platforms
 
 Based on `requirements.txt`, `runtime.txt`, and `gunicorn` being listed, this app is designed for **Render** or **Railway** (PaaS platforms).
 
@@ -1373,7 +1373,7 @@ python-3.11.x
 ```
 This file is used by Render/Railway/Heroku to select the Python buildpack version.
 
-## 🔸 Production Server
+##  Production Server
 
 ```
 gunicorn==23.0.0
@@ -1388,7 +1388,7 @@ gunicorn app:app --bind 0.0.0.0:$PORT --workers=1 --timeout=120
 - `--workers=1` → Single worker (models are large; multiple workers would duplicate 35MB in memory each)
 - `--timeout=120` → 120-second timeout for scraping + inference
 
-## 🔸 Environment Variables
+##  Environment Variables
 
 | Variable | Purpose | Default |
 |---|---|---|
@@ -1400,7 +1400,7 @@ GEMINI_API_KEY=... (if AI summary feature is added)
 SECRET_KEY=...     (for Flask session security)
 ```
 
-## 🔸 Build Process
+##  Build Process
 
 1. Platform detects `requirements.txt` → runs `pip install -r requirements.txt`
 2. Platform detects `runtime.txt` → selects Python version
@@ -1409,7 +1409,7 @@ SECRET_KEY=...     (for Flask session security)
 5. NLTK downloads triggered at startup (`nltk.download(...)`)
 6. App ready to serve traffic
 
-## 🔸 CI/CD
+##  CI/CD
 
 No CI/CD pipeline configured in this project. For a professional setup:
 ```yaml
@@ -1425,7 +1425,7 @@ jobs:
       - run: render deploy  # or railway up
 ```
 
-## 🔸 Monitoring
+##  Monitoring
 
 No monitoring configured. Production additions would include:
 - **Sentry** — error tracking (automatic exception capture)
@@ -1517,22 +1517,22 @@ rating = rating_match.group() if rating_match else 'N/A'
 
 | Priority | Feature | Description |
 |---|---|---|
-| 🔴 High | **User Authentication** | JWT-based login so users can save analysis history |
-| 🔴 High | **Rate Limiting** | Flask-Limiter to prevent API abuse |
-| 🔴 High | **Input Sanitization** | Escape HTML in review text before injecting into DOM |
-| 🟡 Medium | **Gemini AI Summary** | README mentions Gemini API — the feature is planned but not yet in code |
-| 🟡 Medium | **Database (PostgreSQL)** | Store analysis history per URL for caching |
-| 🟡 Medium | **Proper Caching** | Redis cache for URL → analysis result (5-min TTL) |
-| 🟡 Medium | **BERT Embeddings** | Replace Word2Vec with sentence-transformers for better accuracy |
-| 🟡 Medium | **Flipkart Support** | Extend scraper to work on Flipkart, eBay, Walmart |
-| 🟢 Low | **Browser Extension** | Chrome extension wrapping the same API |
-| 🟢 Low | **Review History Dashboard** | Show analysis history per URL over time |
-| 🟢 Low | **Batch URL Processing** | Analyze multiple product URLs in one request |
-| 🟢 Low | **Model Retraining Pipeline** | MLflow or Kubeflow pipeline for periodic retraining |
-| 🟢 Low | **Explainability (LIME/SHAP)** | Show WHICH words triggered the fake classification |
-| 🟢 Low | **Multi-language Support** | Translate non-English reviews before analysis |
-| 🟢 Low | **API Key Auth for External Use** | Let third-party developers integrate |
-| 🟢 Low | **Unit Tests** | pytest suite for all functions |
+|  High | **User Authentication** | JWT-based login so users can save analysis history |
+|  High | **Rate Limiting** | Flask-Limiter to prevent API abuse |
+|  High | **Input Sanitization** | Escape HTML in review text before injecting into DOM |
+|  Medium | **Gemini AI Summary** | README mentions Gemini API — the feature is planned but not yet in code |
+|  Medium | **Database (PostgreSQL)** | Store analysis history per URL for caching |
+|  Medium | **Proper Caching** | Redis cache for URL → analysis result (5-min TTL) |
+|  Medium | **BERT Embeddings** | Replace Word2Vec with sentence-transformers for better accuracy |
+|  Medium | **Flipkart Support** | Extend scraper to work on Flipkart, eBay, Walmart |
+|  Low | **Browser Extension** | Chrome extension wrapping the same API |
+|  Low | **Review History Dashboard** | Show analysis history per URL over time |
+|  Low | **Batch URL Processing** | Analyze multiple product URLs in one request |
+|  Low | **Model Retraining Pipeline** | MLflow or Kubeflow pipeline for periodic retraining |
+|  Low | **Explainability (LIME/SHAP)** | Show WHICH words triggered the fake classification |
+|  Low | **Multi-language Support** | Translate non-English reviews before analysis |
+|  Low | **API Key Auth for External Use** | Let third-party developers integrate |
+|  Low | **Unit Tests** | pytest suite for all functions |
 
 ---
 
@@ -1751,7 +1751,7 @@ rating = rating_match.group() if rating_match else 'N/A'
 31. If you had to add a new feature (e.g., star rating distribution chart), how would you change the API response?
 32. Your `MOCK_REVIEWS` are hardcoded in Python — what would be a better architecture for this?
 33. How would you implement result caching using a URL hash as the cache key?
-34. Why does `emoji.demojize("I love it ❤️")` return `"I love it :red_heart:"` — how does this help the model?
+34. Why does `emoji.demojize("I love it ")` return `"I love it :red_heart:"` — how does this help the model?
 35. What is `re.sub(r'<.*?>', '', r)` doing? The `?` makes it non-greedy — why does that matter?
 36. If two users submit the same URL simultaneously, are there any race conditions?
 37. Can you explain what `animation-fill-mode: both` does in CSS?
@@ -1775,7 +1775,7 @@ rating = rating_match.group() if rating_match else 'N/A'
 
 # 23. EXPLAIN EVERY LINE OF CODE
 
-## 🔸 `app.py` — Complete Line-by-Line Explanation
+##  `app.py` — Complete Line-by-Line Explanation
 
 ```python
 # Lines 107-113: Imports
@@ -1821,7 +1821,7 @@ nltk.download('omw-1.4')
 ```
 Downloads NLTK corpora/models required by preprocessing.py. These are downloaded to the NLTK data directory (~/.nltk_data). `punkt` = Punkt tokenizer model. `stopwords` = list of English stop words. `wordnet` = lexical database for lemmatization. `omw-1.4` = Open Multilingual Wordnet (required by newer NLTK).
 
-> ⚠️ This should NOT be in app.py for production — downloads should happen in a build/Dockerfile step. But for simplicity in development/demo, it's acceptable.
+>  This should NOT be in app.py for production — downloads should happen in a build/Dockerfile step. But for simplicity in development/demo, it's acceptable.
 
 ```python
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -1968,7 +1968,7 @@ if __name__ == '__main__':
 
 ---
 
-## 🔸 `model.py` — Complete Explanation
+##  `model.py` — Complete Explanation
 
 ```python
 import pandas as pd
@@ -2009,7 +2009,7 @@ Local helper function inside `train_and_save_models`. Converts text to a 100-dim
     df['rating'] = np.random.randint(1, 6, size=len(df))
     df['length'] = df['review'].apply(lambda x: len(x.split()))
 ```
-⚠️ **IMPORTANT FLAW:** Ratings are randomly generated (1–5) for training because the dataset doesn't have real ratings. This means the SVM learns no useful signal from the rating feature during training. The rating feature adds noise, not signal. In production, this should either use real ratings or be dropped.
+ **IMPORTANT FLAW:** Ratings are randomly generated (1–5) for training because the dataset doesn't have real ratings. This means the SVM learns no useful signal from the rating feature during training. The rating feature adds noise, not signal. In production, this should either use real ratings or be dropped.
 
 ```python
     text_vectors = np.array([get_feature_vector(preprocess_text(x), word2vec_model) for x in df['review']])
@@ -2084,7 +2084,7 @@ If ALL words are out-of-vocabulary (no vectors generated), default to Real (0) w
 
 ---
 
-## 🔸 `preprocessing.py` — Complete Explanation
+##  `preprocessing.py` — Complete Explanation
 
 ```python
 import re          # Regular expressions for pattern matching
@@ -2103,7 +2103,7 @@ Module-level instantiation avoids re-creating these objects on every function ca
 def handle_emojis(text):
     return emoji.demojize(text)
 ```
-`emoji.demojize("❤️")` → `":red_heart:"`. This converts emoji into text tokens that Word2Vec can process. Without this, emojis are either dropped or corrupted.
+`emoji.demojize("")` → `":red_heart:"`. This converts emoji into text tokens that Word2Vec can process. Without this, emojis are either dropped or corrupted.
 
 ```python
 def correct_spelling(text):
@@ -2166,7 +2166,7 @@ Final pipeline steps. Returns the fully cleaned, normalized, stemmed string.
 
 ---
 
-## 🔸 `scraper.py` — Complete Explanation
+##  `scraper.py` — Complete Explanation
 
 ```python
 MOCK_REVIEWS = {
@@ -2242,7 +2242,7 @@ Minimum 2 reviews threshold before returning real data. Single review doesn't gi
 
 ---
 
-## 🔸 `script.js` — Complete Explanation
+##  `script.js` — Complete Explanation
 
 ```javascript
 function analyzeReviews() {
@@ -2334,7 +2334,7 @@ CSS class toggle. When `accordion-active` is added, CSS rules change `max-height
 
 # 24. CODE INEFFICIENCIES & IMPROVEMENTS
 
-## 🔸 Issue 1: Lemmatization Result Overwritten by Stemming (Bug)
+##  Issue 1: Lemmatization Result Overwritten by Stemming (Bug)
 
 **Where:** `preprocessing.py`, `lemmatize_and_stem()`, lines 31–32
 
@@ -2361,7 +2361,7 @@ def lemmatize_and_stem(r):
 
 ---
 
-## 🔸 Issue 2: `innerHTML +=` in a Loop (Performance)
+##  Issue 2: `innerHTML +=` in a Loop (Performance)
 
 **Where:** `script.js`, `renderDashboard()`, line 230
 
@@ -2393,7 +2393,7 @@ resultDiv.appendChild(fragment);
 
 ---
 
-## 🔸 Issue 3: Random Ratings in Training Dataset
+##  Issue 3: Random Ratings in Training Dataset
 
 **Where:** `model.py`, `train_and_save_models()`, line 41
 
@@ -2414,7 +2414,7 @@ df['rating'] = np.random.randint(1, 6, size=len(df))  # Random 1-5
 
 ---
 
-## 🔸 Issue 4: XSS Vulnerability in Review Card HTML
+##  Issue 4: XSS Vulnerability in Review Card HTML
 
 **Where:** `script.js`, `renderDashboard()`, line 202
 
@@ -2441,7 +2441,7 @@ function escapeHTML(str) {
 
 ---
 
-## 🔸 Issue 5: No Global Exception Handler in Flask
+##  Issue 5: No Global Exception Handler in Flask
 
 **Where:** `app.py`
 
@@ -2460,7 +2460,7 @@ def not_found(e):
 
 ---
 
-## 🔸 Issue 6: NLTK Downloads in App Startup
+##  Issue 6: NLTK Downloads in App Startup
 
 **Where:** `app.py`, lines 115–119
 
@@ -2482,7 +2482,7 @@ Or add a `build.sh` script run before gunicorn starts.
 
 ---
 
-## 🔸 Issue 7: URL Not Validated as Actual URL
+##  Issue 7: URL Not Validated as Actual URL
 
 **Where:** `app.py` and `script.js`
 
@@ -2507,16 +2507,16 @@ Welcome to your Fake Review Detection project mock interview. I will ask you one
 
 ---
 
-> ## 🎯 QUESTION 1 (Easy — Warm-up):
+> ##  QUESTION 1 (Easy — Warm-up):
 > 
 > **"Tell me about your Fake Review Detection project in 2 minutes."**
 
 ---
 
 *(Answer this question in your own words. After you give your response, I will:)*
-- *Evaluate what you said ✅*
-- *Tell you what you missed ⚠️*
-- *Give you the ideal answer 💡*
+- *Evaluate what you said *
+- *Tell you what you missed *
+- *Give you the ideal answer *
 - *Ask the next, harder question*
 
 ---
@@ -2526,8 +2526,8 @@ Welcome to your Fake Review Detection project mock interview. I will ask you one
 
 ---
 
-**🔼 Difficulty will increase with each question. When you're ready, respond with your answer and type "Next" to get the next question.**
+** Difficulty will increase with each question. When you're ready, respond with your answer and type "Next" to get the next question.**
 
 ---
 
-*This completes the full 25-section documentation. The guide covers every aspect of your Fake Review Detection project, from first principles to advanced interview preparation. Good luck in your interviews!* 🚀
+*This completes the full 25-section documentation. The guide covers every aspect of your Fake Review Detection project, from first principles to advanced interview preparation. Good luck in your interviews!* 

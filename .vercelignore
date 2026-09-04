@@ -1,0 +1,14 @@
+# Exclude heavy training datasets and docs from Vercel serverless function bundle
+row_data.csv
+*.csv
+fake_review_detection_guide.md
+assets/
+nltk_data/
+steps.txt
+runtime.txt
+venv/
+.venv/
+__pycache__/
+*.pyc
+.git
+.gitignore

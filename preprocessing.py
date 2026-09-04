@@ -1,67 +1,64 @@
 import re
-import os
 import emoji
-import nltk
+from nltk.stem import PorterStemmer
 
-# Use NLTK data bundled with the project
-nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
-nltk.data.path.insert(0, nltk_data_path)
-
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer, PorterStemmer
-from nltk.tokenize import word_tokenize
-
-
-# Initialize lemmatizer and stemmer
-lemmatizer = WordNetLemmatizer()
+# Initialize Porter Stemmer (deterministic, zero download required)
 stemmer = PorterStemmer()
 
+# Standard NLTK English Stopwords (self-contained to eliminate 100MB+ nltk_data bundle)
+ENGLISH_STOPWORDS = {
+    'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've",
+    "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his',
+    'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself',
+    'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this',
+    'that', "that'll", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been',
+    'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the',
+    'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for',
+    'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after',
+    'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under',
+    'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all',
+    'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not',
+    'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don',
+    "don't", 'should', "should've", 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain',
+    'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't", 'doesn', "doesn't",
+    'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 'ma',
+    'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't", 'shan', "shan't",
+    'shouldn', "shouldn't", 'wasn', "wasn't", 'weren', "weren't", 'won', "won't",
+    'wouldn', "wouldn't"
+}
 
-# Function to convert emojis into text representation
+# Contraction expansion dictionary
+CONTRACTIONS = {
+    "ain't": "am not", "aren't": "are not", "can't": "can not", "can't've": "can not have",
+    "cause": "because", "could've": "could have", "couldn't": "could not", "couldn't've": "could not have",
+    "didn't": "did not", "doesn't": "does not", "don't": "do not", "hadn't": "had not",
+    "hasn't": "has not", "haven't": "have not", "he's": "he is", "how's": "how is",
+    "i'm": "i am", "i've": "i have", "isn't": "is not", "it's": "it is", "let's": "let us",
+    "should've": "should have", "shouldn't": "should not", "that's": "that is", "there's": "there is",
+    "they're": "they are", "they've": "they have", "wasn't": "was not", "we're": "we are",
+    "we've": "we have", "weren't": "were not", "what's": "what is", "where's": "where is",
+    "who's": "who is", "why's": "why is", "won't": "will not", "would've": "would have",
+    "wouldn't": "would not", "you're": "you are", "you've": "you have"
+}
+
 def handle_emojis(text):
     """Converts emojis into text descriptions."""
-    return emoji.demojize(text)
+    try:
+        return emoji.demojize(text)
+    except Exception:
+        return text
 
-
-# Function to correct spelling mistakes (disabled for performance)
-def correct_spelling(text):
-    """Returns text as-is (spelling correction removed for speed)."""
-    return text
-
-
-# Function to apply lemmatization, stemming, and remove stopwords
 def lemmatize_and_stem(r):
-    """Performs tokenization, removes stopwords, applies lemmatization, and stemming."""
+    """Tokenizes, filters stopwords, and applies Porter stemming."""
+    # Split tokens matching alphanumeric and punctuation
+    words = re.findall(r"\w+|[^\w\s]", r)
+    words = [w for w in words if w not in ENGLISH_STOPWORDS]
+    stemmed_words = [stemmer.stem(w) for w in words]
+    return " ".join(stemmed_words)
 
-    words = word_tokenize(r)
-
-    stop_words = set(stopwords.words("english"))
-
-    words = [word for word in words if word not in stop_words]
-
-    lemmatized_words = [
-        lemmatizer.lemmatize(word)
-        for word in words
-    ]
-
-    stemmed_words = [
-        stemmer.stem(word)
-        for word in words
-    ]
-
-    # Keep the original behavior: use stemmed words
-    r = " ".join(stemmed_words)
-
-    return r
-
-
-# Function to preprocess text
 def preprocess_text(r):
-    """Performs text preprocessing including lowercasing, removing special
-    characters, handling numbers, expanding contractions, correcting spelling,
-    handling emojis, and applying lemmatization and stemming."""
-
-    # Convert text to lowercase and remove unnecessary spaces
+    """Performs text preprocessing including lowercasing, currency expansion,
+    contractions, emoji handling, stopword removal, and stemming."""
     r = str(r).lower().strip()
 
     # Replace common symbols with text representations
@@ -71,78 +68,25 @@ def preprocess_text(r):
     r = r.replace("€", " euro ")
     r = r.replace("@", " at ")
 
-    # Convert large numbers
+    # Numerical abbreviations
     r = r.replace(",000,000,000 ", "b ")
     r = r.replace(",000,000 ", "m ")
     r = r.replace(",000 ", "k ")
-
-    # Handling numerical abbreviations
     r = re.sub(r"([0-9]+)000000000", r"\1b", r)
     r = re.sub(r"([0-9]+)000000", r"\1m", r)
     r = re.sub(r"([0-9]+)000", r"\1k", r)
 
-    # Dictionary for expanding contractions
-    contractions = {
-        "ain't": "am not",
-        "aren't": "are not",
-        "can't": "can not",
-        "can't've": "can not have",
-        "cause": "because",
-        "could've": "could have",
-        "couldn't": "could not",
-        "couldn't've": "could not have",
-        "didn't": "did not",
-        "doesn't": "does not",
-        "don't": "do not",
-        "hadn't": "had not",
-        "hasn't": "has not",
-        "haven't": "have not",
-        "he's": "he is",
-        "how's": "how is",
-        "i'm": "i am",
-        "i've": "i have",
-        "isn't": "is not",
-        "it's": "it is",
-        "let's": "let us",
-        "should've": "should have",
-        "shouldn't": "should not",
-        "that's": "that is",
-        "there's": "there is",
-        "they're": "they are",
-        "they've": "they have",
-        "wasn't": "was not",
-        "we're": "we are",
-        "we've": "we have",
-        "weren't": "were not",
-        "what's": "what is",
-        "where's": "where is",
-        "who's": "who is",
-        "why's": "why is",
-        "won't": "will not",
-        "would've": "would have",
-        "wouldn't": "would not",
-        "you're": "you are",
-        "you've": "you have"
-    }
-
     # Expand contractions
-    r_decontracted = [
-        contractions.get(word, word)
-        for word in r.split()
-    ]
-
+    r_decontracted = [CONTRACTIONS.get(word, word) for word in r.split()]
     r = " ".join(r_decontracted)
 
     # Remove HTML tags
     r = re.sub(r"<.*?>", "", r)
 
-    # Correct spelling mistakes
-    r = correct_spelling(r)
-
-    # Convert emojis into text representations
+    # Handle emojis
     r = handle_emojis(r)
 
-    # Apply lemmatization and stemming
+    # Lemmatization / Stemming
     r = lemmatize_and_stem(r)
 
     return r
