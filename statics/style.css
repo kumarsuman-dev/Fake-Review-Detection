@@ -13,10 +13,16 @@
     --text-secondary: #475569;
     --text-muted: #64748b;
     
+    /* Amazon Theme Colors */
+    --color-amazon-dark: #131921;
+    --color-amazon-nav: #232f3e;
+    --color-amazon-orange: #ff9900;
+    --color-amazon-orange-hover: #e47911;
+    --color-amazon-yellow: #febd69;
+    --color-amazon-btn: #ffd814;
+    --color-amazon-btn-hover: #f7ca00;
+    
     /* Semantic Colors */
-    --color-teal: #0f766e;
-    --color-teal-light: #0d9488;
-    --color-navy: #0f172a;
     --color-emerald: #059669;
     --color-rose: #e11d48;
     --color-amber: #d97706;
@@ -40,7 +46,7 @@ body {
 .concept-board-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+    box-shadow: 0 20px 45px -12px rgba(19, 25, 33, 0.08), 0 1px 3px rgba(19, 25, 33, 0.04);
 }
 
 /* Preset Quick-Click Buttons */
@@ -59,15 +65,15 @@ body {
 }
 
 .preset-btn:hover {
-    background-color: #0f172a;
-    border-color: #0f172a;
+    background-color: #131921;
+    border-color: #ff9900;
     color: #ffffff;
     transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+    box-shadow: 0 2px 6px rgba(19, 25, 33, 0.2);
 }
 
 .preset-btn:hover i {
-    color: #38bdf8 !important;
+    color: #ff9900 !important;
 }
 
 /* Platform Compatibility Pills */
@@ -95,14 +101,14 @@ body {
 }
 
 .tab-btn:hover {
-    color: #0f172a;
+    color: #131921;
     background-color: #f1f5f9;
 }
 
 .tab-btn.active {
-    background-color: #0f172a;
-    color: #ffffff;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+    background-color: #131921;
+    color: #ff9900;
+    box-shadow: 0 2px 6px rgba(19, 25, 33, 0.2);
 }
 
 /* Review Cards */
