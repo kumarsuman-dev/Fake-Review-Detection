@@ -28,10 +28,14 @@ def get_models():
     return _word2vec_model, _svm_model
 
 @app.route("/")
+@app.route("/api")
+@app.route("/api/index")
 def index():
     return render_template("index.html")
 
 @app.route("/api/health")
+@app.route("/health")
+@app.route("/api/index/health")
 def health():
     models_ready = False
     model_err = None
@@ -51,6 +55,8 @@ def health():
     })
 
 @app.route("/analyze", methods=["POST"])
+@app.route("/api/analyze", methods=["POST"])
+@app.route("/api/index/analyze", methods=["POST"])
 def analyze():
     """
     API endpoint to analyze reviews from any e-commerce product URL or direct raw review text.

@@ -13,8 +13,6 @@ joblib==1.4.2
 gensim==4.3.3
 emoji==2.12.1
 
-# Web Scraping & TLS Impersonation
+# Web Scraping
 requests==2.32.3
 beautifulsoup4==4.12.3
-lxml==5.2.2
-curl_cffi>=0.7.0
