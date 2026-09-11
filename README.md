@@ -6,9 +6,20 @@
 [![Flask](https://img.shields.io/badge/Flask-3.1.0-lightgrey?logo=flask&style=flat-square)](https://flask.palletsprojects.com/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-SVM-orange?logo=scikit-learn&style=flat-square)](https://scikit-learn.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-Fast%20Inference-013243?logo=numpy&style=flat-square)](https://numpy.org/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Try%20Console-134E4A?style=flat-square)](#live-demo)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
 ---
+
+## Live Demo
+
+Run and test the interactive review scanner locally:
+```bash
+python3 app.py
+```
+Then open: **[http://localhost:5001](http://localhost:5001)**
+
+The live console includes one-click benchmarks for **Amazon**, **Flipkart**, **Walmart**, **Best Buy**, **eBay**, and **Shopify**, as well as a direct review text auditor with real-time confidence scores.
 
 ## Overview
 
