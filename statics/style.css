@@ -1,155 +1,155 @@
 /* ==========================================================================
-   Fake Review Detection — Modern SaaS Light Theme
-   Clean, Professional, Human-Designed UI Inspired by Premium Educational & SaaS Platforms
-   GitHub: https://github.com/kumarsuman-dev/Fake-Review-Detection
+   Fake Review Detection — Redesigned UI
+   Intentional, warm, two-color design system
+   Accent: #134E4A (forest green)  |  Warning: #B45309 (amber, fake-only)
    ========================================================================== */
 
 :root {
-    --bg-page: #f8fafc;
-    --surface-card: #ffffff;
-    --border-subtle: #e2e8f0;
-    --border-card: #cbd5e1;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    
-    /* Semantic Colors */
-    --color-teal: #0f766e;
-    --color-teal-light: #0d9488;
-    --color-navy: #0f172a;
-    --color-emerald: #059669;
-    --color-rose: #e11d48;
-    --color-amber: #d97706;
+    --bg-page: #FAFAF8;
+    --surface-card: #FFFFFF;
+    --border-subtle: #E5E5E3;
+    --border-card: #D4D4D2;
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A48;
+    --text-muted: #7A7A78;
+
+    /* Two-color system */
+    --accent: #134E4A;
+    --accent-light: rgba(19, 78, 74, 0.08);
+    --accent-lighter: rgba(19, 78, 74, 0.04);
+    --warning: #B45309;
+    --warning-light: rgba(180, 83, 9, 0.08);
 }
 
 body {
     background-color: var(--bg-page);
     color: var(--text-primary);
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle Dot Grid Background (Warm, clean, non-AI aesthetic) */
-.bg-subtle-pattern {
-    background-color: #f8fafc;
-    background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px);
-    background-size: 20px 20px;
+/* Soft background blob — single, top-right corner */
+.bg-warm {
+    background-color: var(--bg-page);
+    position: relative;
 }
 
-/* Premium Floating Concept Board Card */
+.bg-warm::before {
+    content: '';
+    position: fixed;
+    top: -120px;
+    right: -120px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(19, 78, 74, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Hero card — slight rotation for asymmetry */
+.hero-card-wrapper {
+    transform: rotate(2deg) translateY(8px);
+    transition: transform 0.3s ease;
+}
+
+.hero-card-wrapper:hover {
+    transform: rotate(1deg) translateY(4px);
+}
+
+/* Demo console card — clean, minimal */
 .concept-board-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 16px -4px rgba(26, 26, 26, 0.06);
+    border-radius: 1rem;
 }
 
-/* Preset Quick-Click Buttons */
-.preset-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.35rem 0.65rem;
-    border-radius: 0.5rem;
-    background-color: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    color: #334155;
-    font-size: 0.75rem;
-    font-weight: 500;
-    transition: all 0.15s ease;
+/* Sample links — underlined text, no pills */
+.sample-link {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    text-decoration: underline;
+    text-decoration-color: rgba(122, 122, 120, 0.4);
+    text-underline-offset: 2px;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
 }
 
-.preset-btn:hover {
-    background-color: #0f172a;
-    border-color: #0f172a;
-    color: #ffffff;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
-}
-
-.preset-btn:hover i {
-    color: #38bdf8 !important;
-}
-
-/* Platform Compatibility Pills */
-.platform-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.375rem;
-    background-color: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    color: #475569;
-    font-size: 0.6875rem;
-    font-weight: 600;
+.sample-link:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
 }
 
 /* Tab Filter Buttons */
 .tab-btn {
     padding: 0.4rem 0.85rem;
     border-radius: 0.5rem;
-    color: #64748b;
+    color: var(--text-muted);
     transition: all 0.15s ease;
     font-size: 0.75rem;
     font-weight: 600;
 }
 
 .tab-btn:hover {
-    color: #0f172a;
-    background-color: #f1f5f9;
+    color: var(--text-primary);
+    background-color: rgba(19, 78, 74, 0.05);
 }
 
 .tab-btn.active {
-    background-color: #0f172a;
-    color: #ffffff;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+    background-color: var(--accent);
+    color: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(19, 78, 74, 0.2);
 }
 
 /* Review Cards */
 .review-card {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.875rem;
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
     padding: 1.25rem;
     transition: all 0.2s ease;
     position: relative;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.03);
 }
 
 .review-card:hover {
-    border-color: #cbd5e1;
-    box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.08);
+    border-color: var(--border-card);
+    box-shadow: 0 4px 12px -4px rgba(26, 26, 26, 0.06);
 }
 
 .review-card.card-real {
-    border-left: 4px solid var(--color-emerald);
+    border-left: 3px solid var(--accent);
 }
 
 .review-card.card-fake {
-    border-left: 4px solid var(--color-rose);
-    background-color: #fffafb;
+    border-left: 3px solid var(--warning);
+    background-color: rgba(180, 83, 9, 0.02);
 }
 
 /* Prediction Badges */
 .badge-real {
-    background-color: #ecfdf5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
+    background-color: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid rgba(19, 78, 74, 0.15);
     font-size: 0.6875rem;
     font-weight: 700;
     letter-spacing: 0.025em;
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     padding: 0.15rem 0.5rem;
 }
 
 .badge-fake {
-    background-color: #fff1f2;
-    color: #9f1239;
-    border: 1px solid #fecdd3;
+    background-color: var(--warning-light);
+    color: var(--warning);
+    border: 1px solid rgba(180, 83, 9, 0.2);
     font-size: 0.6875rem;
     font-weight: 700;
     letter-spacing: 0.025em;
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     padding: 0.15rem 0.5rem;
 }
 
@@ -176,19 +176,41 @@ body {
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: var(--bg-page);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: var(--border-card);
     border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: var(--text-muted);
+}
+
+/* Mode switcher active state */
+.mode-btn-active {
+    background-color: var(--accent) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 4px rgba(19, 78, 74, 0.2);
+}
+
+.mode-btn-inactive {
+    color: var(--text-muted);
+}
+
+.mode-btn-inactive:hover {
+    color: var(--text-primary);
+}
+
+/* Focus ring using accent */
+input:focus, textarea:focus, select:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px rgba(19, 78, 74, 0.1) !important;
+    outline: none;
 }

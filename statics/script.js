@@ -47,13 +47,13 @@ function switchMode(mode) {
     const textContainer = document.getElementById("container-text-mode");
 
     if (mode === 'url') {
-        urlBtn.className = "px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all";
-        textBtn.className = "px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-semibold flex items-center gap-1.5 transition-all";
+        urlBtn.className = "px-3 py-1.5 rounded-md mode-btn-active transition-all";
+        textBtn.className = "px-3 py-1.5 rounded-md mode-btn-inactive transition-all";
         urlContainer.classList.remove("hidden");
         textContainer.classList.add("hidden");
     } else {
-        textBtn.className = "px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all";
-        urlBtn.className = "px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-semibold flex items-center gap-1.5 transition-all";
+        textBtn.className = "px-3 py-1.5 rounded-md mode-btn-active transition-all";
+        urlBtn.className = "px-3 py-1.5 rounded-md mode-btn-inactive transition-all";
         textContainer.classList.remove("hidden");
         urlContainer.classList.add("hidden");
         const rawText = document.getElementById("raw-review-text");
@@ -70,23 +70,23 @@ function detectPlatform(url) {
 
     const lower = url.toLowerCase();
     if (lower.includes("amazon.") || lower.includes("amzn.")) {
-        icon.className = "fa-brands fa-amazon text-base text-amber-600";
+        icon.className = "fa-brands fa-amazon text-sm text-ink";
     } else if (lower.includes("walmart.")) {
-        icon.className = "fa-solid fa-asterisk text-base text-blue-600";
+        icon.className = "fa-solid fa-asterisk text-sm text-ink";
     } else if (lower.includes("flipkart.")) {
-        icon.className = "fa-solid fa-cart-shopping text-base text-yellow-600";
+        icon.className = "fa-solid fa-cart-shopping text-sm text-ink";
     } else if (lower.includes("shopify.") || lower.includes("myshopify.")) {
-        icon.className = "fa-brands fa-shopify text-base text-emerald-600";
+        icon.className = "fa-brands fa-shopify text-sm text-ink";
     } else if (lower.includes("ebay.")) {
-        icon.className = "fa-brands fa-ebay text-base text-rose-600";
+        icon.className = "fa-brands fa-ebay text-sm text-ink";
     } else if (lower.includes("bestbuy.")) {
-        icon.className = "fa-solid fa-tag text-base text-yellow-500";
+        icon.className = "fa-solid fa-tag text-sm text-ink";
     } else if (lower.includes("target.")) {
-        icon.className = "fa-solid fa-bullseye text-base text-red-600";
+        icon.className = "fa-solid fa-bullseye text-sm text-ink";
     } else if (lower.startsWith("http://") || lower.startsWith("https://")) {
-        icon.className = "fa-solid fa-link text-base text-teal-700";
+        icon.className = "fa-solid fa-link text-sm text-accent";
     } else {
-        icon.className = "fa-solid fa-globe text-base text-slate-400";
+        icon.className = "fa-solid fa-globe text-sm text-muted";
     }
 }
 
@@ -311,7 +311,7 @@ function renderDashboardOverview(reviews, isDemo, platform = "E-Commerce", messa
     // Metadata
     const sampleEl = document.getElementById("meta-sample-count");
     if (sampleEl) {
-        sampleEl.innerHTML = `${totalCount} reviews <span class="text-[11px] text-slate-500 font-medium">(${isDemo ? 'Benchmark' : 'Live ' + platform})</span>`;
+        sampleEl.innerHTML = `${totalCount} reviews <span class="text-[11px] text-muted font-medium">(${isDemo ? 'Benchmark' : 'Live ' + platform})</span>`;
     }
     document.getElementById("meta-avg-conf").textContent = `${avgConfidence}%`;
 
@@ -324,16 +324,16 @@ function renderDashboardOverview(reviews, isDemo, platform = "E-Commerce", messa
     const trustDesc = document.getElementById("stat-trust-desc");
     if (trustScore >= 80) {
         riskBadge.textContent = "LOW RISK";
-        riskBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold bg-emerald-50 text-emerald-700 border border-emerald-200";
-        trustDesc.textContent = "High organic density. Genuine human consumer language patterns dominant.";
+        riskBadge.className = "text-[10px] font-mono px-2 py-0.5 rounded font-bold bg-accent-light text-accent border border-accent/15";
+        trustDesc.textContent = "High organic density. Genuine human language patterns dominant.";
     } else if (trustScore >= 50) {
         riskBadge.textContent = "MODERATE RISK";
-        riskBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold bg-amber-50 text-amber-800 border border-amber-200";
-        trustDesc.textContent = "Elevated synthetic signature detected across multiple reviews.";
+        riskBadge.className = "text-[10px] font-mono px-2 py-0.5 rounded font-bold bg-warn-light text-warn border border-warn/20";
+        trustDesc.textContent = "Elevated synthetic patterns detected across multiple reviews.";
     } else {
         riskBadge.textContent = "HIGH RISK";
-        riskBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold bg-rose-50 text-rose-700 border border-rose-200";
-        trustDesc.textContent = "Heavy bot or computer-generated manipulation flagged.";
+        riskBadge.className = "text-[10px] font-mono px-2 py-0.5 rounded font-bold bg-warn-light text-warn border border-warn/20";
+        trustDesc.textContent = "Heavy computer-generated manipulation flagged.";
     }
 
     // Unhide dashboard & smooth scroll
@@ -408,11 +408,11 @@ function applyFiltersAndRender() {
         let starsHtml = "";
         for (let i = 1; i <= 5; i++) {
             if (i <= Math.floor(ratingVal)) {
-                starsHtml += '<i class="fa-solid fa-star text-amber-400 text-xs mr-0.5"></i>';
+                starsHtml += '<i class="fa-solid fa-star text-ink text-xs mr-0.5"></i>';
             } else if (i - 0.5 <= ratingVal) {
-                starsHtml += '<i class="fa-solid fa-star-half-stroke text-amber-400 text-xs mr-0.5"></i>';
+                starsHtml += '<i class="fa-solid fa-star-half-stroke text-ink text-xs mr-0.5"></i>';
             } else {
-                starsHtml += '<i class="fa-regular fa-star text-slate-300 text-xs mr-0.5"></i>';
+                starsHtml += '<i class="fa-regular fa-star text-muted/40 text-xs mr-0.5"></i>';
             }
         }
 
@@ -420,39 +420,39 @@ function applyFiltersAndRender() {
             <div class="review-card ${cardClass}" id="review-card-${index}">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
                     <div class="flex items-center gap-3">
-                        <div class="flex items-center">${starsHtml} <span class="text-xs font-bold text-slate-600 ml-1.5">${ratingVal.toFixed(1)}</span></div>
+                        <div class="flex items-center">${starsHtml} <span class="text-xs font-semibold text-muted ml-1.5">${ratingVal.toFixed(1)}</span></div>
                         <span class="${badgeClass}">
                             ${badgeLabel}
                         </span>
                     </div>
-                    <button onclick="toggleAccordion(${index})" class="accordion-btn text-xs font-semibold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1.5 py-0.5">
+                    <button onclick="toggleAccordion(${index})" class="accordion-btn text-xs font-semibold text-muted hover:text-ink transition-colors flex items-center gap-1.5 py-0.5">
                         <span>Telemetry</span>
                         <i class="fa-solid fa-chevron-down text-[10px]"></i>
                     </button>
                 </div>
 
-                <p class="text-slate-700 text-xs sm:text-sm leading-relaxed font-normal">
+                <p class="text-ink/90 text-xs sm:text-sm leading-relaxed font-normal">
                     "${escapeHtml(review.Review)}"
                 </p>
 
                 <!-- Expandable Technical Audit Panel -->
                 <div class="accordion-content">
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 mt-3 border-t border-slate-100 font-sans text-xs">
-                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                            <div class="text-slate-500 text-[11px]">Model Confidence</div>
-                            <div class="font-extrabold ${isFake ? 'text-rose-600' : 'text-emerald-600'} mt-0.5">${review.confidence || 50}%</div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 mt-3 border-t border-border font-sans text-xs">
+                        <div class="p-2.5 rounded-lg bg-gray-50 border border-border">
+                            <div class="text-muted text-[11px]">Model Confidence</div>
+                            <div class="font-bold ${isFake ? 'text-warn' : 'text-accent'} mt-0.5">${review.confidence || 50}%</div>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                            <div class="text-slate-500 text-[11px]">Token Count</div>
-                            <div class="text-slate-800 font-bold mt-0.5">${review.word_count} words</div>
+                        <div class="p-2.5 rounded-lg bg-gray-50 border border-border">
+                            <div class="text-muted text-[11px]">Token Count</div>
+                            <div class="text-ink font-semibold mt-0.5">${review.word_count} words</div>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                            <div class="text-slate-500 text-[11px]">Uppercase Ratio</div>
-                            <div class="text-slate-800 font-bold mt-0.5">${review.uppercase_ratio}%</div>
+                        <div class="p-2.5 rounded-lg bg-gray-50 border border-border">
+                            <div class="text-muted text-[11px]">Uppercase Ratio</div>
+                            <div class="text-ink font-semibold mt-0.5">${review.uppercase_ratio}%</div>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                            <div class="text-slate-500 text-[11px]">Avg Word Length</div>
-                            <div class="text-slate-800 font-bold mt-0.5">${review.avg_word_len} chars</div>
+                        <div class="p-2.5 rounded-lg bg-gray-50 border border-border">
+                            <div class="text-muted text-[11px]">Avg Word Length</div>
+                            <div class="text-ink font-semibold mt-0.5">${review.avg_word_len} chars</div>
                         </div>
                     </div>
                 </div>
@@ -482,20 +482,30 @@ function loadDemoProduct(productType) {
     let url = "";
 
     switch(productType) {
+        case 'amazon':
         case 'headphones':
             url = "https://www.amazon.com/Sony-WH-1000XM4-Wireless-Canceling-Headphones/dp/B08C56GNE8";
             break;
-        case 'kindle':
-            url = "https://www.amazon.com/Kindle-Paperwhite-Signature-Edition-Ad-Supported/dp/B08N36XNTT";
-            break;
-        case 'chair':
-            url = "https://www.amazon.com/Ergonomic-Office-Chair-Adjustable-Lumbar/dp/B08Q3V1V4K";
-            break;
+        case 'flipkart':
         case 'mobile':
-            url = "https://www.amazon.in/Moto-Pad-60-Neo-Pantone/dp/B0H41QDVN8";
+            url = "https://www.flipkart.com/motorola-moto-pad-g60-neo-tablet/p/itmf12345678";
+            break;
+        case 'walmart':
+        case 'chair':
+            url = "https://www.walmart.com/ip/Ergonomic-Office-Desk-Chair-Lumbar-Support/823746192";
+            break;
+        case 'bestbuy':
+        case 'kindle':
+            url = "https://www.bestbuy.com/site/amazon-kindle-paperwhite-16gb/6521943.p";
+            break;
+        case 'ebay':
+            url = "https://www.ebay.com/itm/Sony-WH-1000XM4-Noise-Canceling-Wireless-Headphones/284912384729";
+            break;
+        case 'shopify':
+            url = "https://shop.gymshark.com/products/gymshark-seamless-hoodie";
             break;
         default:
-            url = "https://www.amazon.com/dp/B0SAMPLE123";
+            url = "https://www.amazon.com/Sony-WH-1000XM4-Wireless-Canceling-Headphones/dp/B08C56GNE8";
             break;
     }
 
@@ -513,10 +523,18 @@ function loadDemoProduct(productType) {
 function exportJSON() {
     if (!allReviewsData || allReviewsData.length === 0) return;
     const jsonStr = JSON.stringify(allReviewsData, null, 2);
+    const label = document.getElementById("btn-json-label");
     navigator.clipboard.writeText(jsonStr).then(() => {
-        alert("Telemetry JSON copied to clipboard.");
+        if (label) {
+            const prev = label.textContent;
+            label.textContent = "Copied!";
+            setTimeout(() => { label.textContent = prev; }, 1500);
+        }
     }).catch(() => {
-        alert("Clipboard copy failed.");
+        if (label) {
+            label.textContent = "Error";
+            setTimeout(() => { label.textContent = "JSON"; }, 1500);
+        }
     });
 }
 

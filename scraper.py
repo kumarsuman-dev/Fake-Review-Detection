@@ -269,6 +269,15 @@ def scrape_reviews(url):
     elif "walmart.com" in lower_url:
         platform_name = "Walmart"
         reviews = scrape_flipkart_reviews(url) or scrape_amazon_reviews(url)
+    elif "bestbuy.com" in lower_url:
+        platform_name = "Best Buy"
+        reviews = scrape_flipkart_reviews(url) or scrape_amazon_reviews(url)
+    elif "ebay." in lower_url:
+        platform_name = "eBay"
+        reviews = scrape_flipkart_reviews(url) or scrape_amazon_reviews(url)
+    elif "shopify" in lower_url or "myshopify" in lower_url:
+        platform_name = "Shopify"
+        reviews = scrape_flipkart_reviews(url) or scrape_amazon_reviews(url)
     else:
         platform_name = "E-Commerce Web"
         reviews = scrape_flipkart_reviews(url) or scrape_amazon_reviews(url)
