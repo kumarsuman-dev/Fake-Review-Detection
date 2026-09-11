@@ -484,28 +484,29 @@ function loadDemoProduct(productType) {
     switch(productType) {
         case 'amazon':
         case 'headphones':
-            url = "https://www.amazon.com/Sony-WH-1000XM4-Wireless-Canceling-Headphones/dp/B08C56GNE8";
+            url = "https://www.amazon.com/Sony-WH-1000XM4-Canceling-Overhead-Headphones/dp/B08445CXRL";
             break;
         case 'flipkart':
+        case 'flipkart_iphone':
         case 'mobile':
-            url = "https://www.flipkart.com/motorola-moto-pad-g60-neo-tablet/p/itmf12345678";
+            url = "https://www.flipkart.com/apple-iphone-15-black-128-gb/p/itm6ac6485515ae4";
+            break;
+        case 'flipkart_boat':
+            url = "https://www.flipkart.com/boat-airdopes-131-bluetooth-headset/p/itmfb5e28a50c8e3";
             break;
         case 'walmart':
         case 'chair':
-            url = "https://www.walmart.com/ip/Ergonomic-Office-Desk-Chair-Lumbar-Support/823746192";
+            url = "https://www.walmart.com/ip/PlayStation-5-Console/363472942";
             break;
-        case 'bestbuy':
+        case 'amazon_in':
+            url = "https://www.amazon.in/Apple-iPhone-15-128-GB/dp/B0CHX1W1XY";
+            break;
         case 'kindle':
-            url = "https://www.bestbuy.com/site/amazon-kindle-paperwhite-16gb/6521943.p";
-            break;
-        case 'ebay':
-            url = "https://www.ebay.com/itm/Sony-WH-1000XM4-Noise-Canceling-Wireless-Headphones/284912384729";
-            break;
-        case 'shopify':
-            url = "https://shop.gymshark.com/products/gymshark-seamless-hoodie";
+        case 'echo':
+            url = "https://www.amazon.com/Echo-Dot-5th-Gen-Charcoal/dp/B09B8V1LZ3";
             break;
         default:
-            url = "https://www.amazon.com/Sony-WH-1000XM4-Wireless-Canceling-Headphones/dp/B08C56GNE8";
+            url = "https://www.amazon.com/Sony-WH-1000XM4-Canceling-Overhead-Headphones/dp/B08445CXRL";
             break;
     }
 
